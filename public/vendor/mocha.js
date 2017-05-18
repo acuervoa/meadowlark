@@ -294,6 +294,7 @@ EventEmitter.prototype.removeListener = function (name, fn) {
       var pos = -1;
 
       for (var i = 0, l = list.length; i < l; i++) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         if (list[i] === fn || (list[i].listener && list[i].listener === fn)) {
           pos = i;
           break;
@@ -302,12 +303,26 @@ EventEmitter.prototype.removeListener = function (name, fn) {
 
       if (pos < 0) {
         return this;
+=======
+	if (list[i] === fn || (list[i].listener && list[i].listener === fn)) {
+	  pos = i;
+	  break;
+	}
+      }
+
+      if (pos < 0) {
+	return this;
+>>>>>>> Add test with mocha and chai
       }
 
       list.splice(pos, 1);
 
       if (!list.length) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         delete this.$events[name];
+=======
+	delete this.$events[name];
+>>>>>>> Add test with mocha and chai
       }
     } else if (list === fn || (list.listener && list.listener === fn)) {
       delete this.$events[name];
@@ -742,9 +757,15 @@ module.exports = function (suite) {
 
     context.describe = context.context = function (title, fn) {
       return common.suite.create({
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         title: title,
         file: file,
         fn: fn
+=======
+	title: title,
+	file: file,
+	fn: fn
+>>>>>>> Add test with mocha and chai
       });
     };
 
@@ -754,9 +775,15 @@ module.exports = function (suite) {
 
     context.xdescribe = context.xcontext = context.describe.skip = function (title, fn) {
       return common.suite.skip({
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         title: title,
         file: file,
         fn: fn
+=======
+	title: title,
+	file: file,
+	fn: fn
+>>>>>>> Add test with mocha and chai
       });
     };
 
@@ -766,9 +793,15 @@ module.exports = function (suite) {
 
     context.describe.only = function (title, fn) {
       return common.suite.only({
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         title: title,
         file: file,
         fn: fn
+=======
+	title: title,
+	file: file,
+	fn: fn
+>>>>>>> Add test with mocha and chai
       });
     };
 
@@ -781,7 +814,11 @@ module.exports = function (suite) {
     context.it = context.specify = function (title, fn) {
       var suite = suites[0];
       if (suite.isPending()) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         fn = null;
+=======
+	fn = null;
+>>>>>>> Add test with mocha and chai
       }
       var test = new Test(title, fn);
       test.file = file;
@@ -838,7 +875,11 @@ module.exports = function (suites, context, mocha) {
      */
     runWithSuite: function runWithSuite (suite) {
       return function run () {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         suite.run();
+=======
+	suite.run();
+>>>>>>> Add test with mocha and chai
       };
     },
 
@@ -891,9 +932,15 @@ module.exports = function (suites, context, mocha) {
        * @returns {Suite}
        */
       only: function only (opts) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         mocha.options.hasOnly = true;
         opts.isOnly = true;
         return this.create(opts);
+=======
+	mocha.options.hasOnly = true;
+	opts.isOnly = true;
+	return this.create(opts);
+>>>>>>> Add test with mocha and chai
       },
 
       /**
@@ -904,8 +951,13 @@ module.exports = function (suites, context, mocha) {
        * @returns {Suite}
        */
       skip: function skip (opts) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         opts.pending = true;
         return this.create(opts);
+=======
+	opts.pending = true;
+	return this.create(opts);
+>>>>>>> Add test with mocha and chai
       },
 
       /**
@@ -919,6 +971,7 @@ module.exports = function (suites, context, mocha) {
        * @returns {Suite}
        */
       create: function create (opts) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         var suite = Suite.create(suites[0], opts.title);
         suite.pending = Boolean(opts.pending);
         suite.file = opts.file;
@@ -935,6 +988,24 @@ module.exports = function (suites, context, mocha) {
         }
 
         return suite;
+=======
+	var suite = Suite.create(suites[0], opts.title);
+	suite.pending = Boolean(opts.pending);
+	suite.file = opts.file;
+	suites.unshift(suite);
+	if (opts.isOnly) {
+	  suite.parent._onlySuites = suite.parent._onlySuites.concat(suite);
+	  mocha.options.hasOnly = true;
+	}
+	if (typeof opts.fn === 'function') {
+	  opts.fn.call(suite);
+	  suites.shift();
+	} else if (typeof opts.fn === 'undefined' && !suite.pending) {
+	  throw new Error('Suite "' + suite.fullTitle() + '" was defined but no callback was supplied. Supply a callback or explicitly skip the suite.');
+	}
+
+	return suite;
+>>>>>>> Add test with mocha and chai
       }
     },
 
@@ -948,9 +1019,15 @@ module.exports = function (suites, context, mocha) {
        * @returns {*}
        */
       only: function (mocha, test) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         test.parent._onlyTests = test.parent._onlyTests.concat(test);
         mocha.options.hasOnly = true;
         return test;
+=======
+	test.parent._onlyTests = test.parent._onlyTests.concat(test);
+	mocha.options.hasOnly = true;
+	return test;
+>>>>>>> Add test with mocha and chai
       },
 
       /**
@@ -959,7 +1036,11 @@ module.exports = function (suites, context, mocha) {
        * @param {string} title
        */
       skip: function (title) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         context.test(title);
+=======
+	context.test(title);
+>>>>>>> Add test with mocha and chai
       },
 
       /**
@@ -968,7 +1049,11 @@ module.exports = function (suites, context, mocha) {
        * @param {number} n
        */
       retries: function (n) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         context.retries(n);
+=======
+	context.retries(n);
+>>>>>>> Add test with mocha and chai
       }
     }
   };
@@ -1010,6 +1095,7 @@ module.exports = function (suite) {
     var suite;
     for (var key in obj) {
       if (typeof obj[key] === 'function') {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         var fn = obj[key];
         switch (key) {
           case 'before':
@@ -1034,6 +1120,32 @@ module.exports = function (suite) {
         suites.unshift(suite);
         visit(obj[key], file);
         suites.shift();
+=======
+	var fn = obj[key];
+	switch (key) {
+	  case 'before':
+	    suites[0].beforeAll(fn);
+	    break;
+	  case 'after':
+	    suites[0].afterAll(fn);
+	    break;
+	  case 'beforeEach':
+	    suites[0].beforeEach(fn);
+	    break;
+	  case 'afterEach':
+	    suites[0].afterEach(fn);
+	    break;
+	  default:
+	    var test = new Test(key, fn);
+	    test.file = file;
+	    suites[0].addTest(test);
+	}
+      } else {
+	suite = Suite.create(suites[0], key);
+	suites.unshift(suite);
+	visit(obj[key], file);
+	suites.shift();
+>>>>>>> Add test with mocha and chai
       }
     }
   }
@@ -1098,12 +1210,21 @@ module.exports = function (suite) {
 
     context.suite = function (title) {
       if (suites.length > 1) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         suites.shift();
       }
       return common.suite.create({
         title: title,
         file: file,
         fn: false
+=======
+	suites.shift();
+      }
+      return common.suite.create({
+	title: title,
+	file: file,
+	fn: false
+>>>>>>> Add test with mocha and chai
       });
     };
 
@@ -1113,12 +1234,21 @@ module.exports = function (suite) {
 
     context.suite.only = function (title) {
       if (suites.length > 1) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         suites.shift();
       }
       return common.suite.only({
         title: title,
         file: file,
         fn: false
+=======
+	suites.shift();
+      }
+      return common.suite.only({
+	title: title,
+	file: file,
+	fn: false
+>>>>>>> Add test with mocha and chai
       });
     };
 
@@ -1200,9 +1330,15 @@ module.exports = function (suite) {
      */
     context.suite = function (title, fn) {
       return common.suite.create({
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         title: title,
         file: file,
         fn: fn
+=======
+	title: title,
+	file: file,
+	fn: fn
+>>>>>>> Add test with mocha and chai
       });
     };
 
@@ -1211,9 +1347,15 @@ module.exports = function (suite) {
      */
     context.suite.skip = function (title, fn) {
       return common.suite.skip({
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         title: title,
         file: file,
         fn: fn
+=======
+	title: title,
+	file: file,
+	fn: fn
+>>>>>>> Add test with mocha and chai
       });
     };
 
@@ -1222,9 +1364,15 @@ module.exports = function (suite) {
      */
     context.suite.only = function (title, fn) {
       return common.suite.only({
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         title: title,
         file: file,
         fn: fn
+=======
+	title: title,
+	file: file,
+	fn: fn
+>>>>>>> Add test with mocha and chai
       });
     };
 
@@ -1235,7 +1383,11 @@ module.exports = function (suite) {
     context.test = function (title, fn) {
       var suite = suites[0];
       if (suite.isPending()) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         fn = null;
+=======
+	fn = null;
+>>>>>>> Add test with mocha and chai
       }
       var test = new Test(title, fn);
       test.file = file;
@@ -1410,6 +1562,7 @@ Mocha.prototype.reporter = function (reporter, reporterOptions) {
     // Try to load reporters from process.cwd() and node_modules
     if (!_reporter) {
       try {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         _reporter = require(reporter);
       } catch (err) {
         if (err.message.indexOf('Cannot find module') !== -1) {
@@ -1423,12 +1576,32 @@ Mocha.prototype.reporter = function (reporter, reporterOptions) {
         } else {
           console.warn('"' + reporter + '" reporter blew up with error:\n' + err.stack);
         }
+=======
+	_reporter = require(reporter);
+      } catch (err) {
+	if (err.message.indexOf('Cannot find module') !== -1) {
+	  // Try to load reporters from a path (absolute or relative)
+	  try {
+	    _reporter = require(path.resolve(process.cwd(), reporter));
+	  } catch (_err) {
+	    err.message.indexOf('Cannot find module') !== -1 ? console.warn('"' + reporter + '" reporter not found')
+	      : console.warn('"' + reporter + '" reporter blew up with error:\n' + err.stack);
+	  }
+	} else {
+	  console.warn('"' + reporter + '" reporter blew up with error:\n' + err.stack);
+	}
+>>>>>>> Add test with mocha and chai
       }
     }
     if (!_reporter && reporter === 'teamcity') {
       console.warn('The Teamcity reporter was moved to a package named ' +
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         'mocha-teamcity-reporter ' +
         '(https://npmjs.org/package/mocha-teamcity-reporter).');
+=======
+	'mocha-teamcity-reporter ' +
+	'(https://npmjs.org/package/mocha-teamcity-reporter).');
+>>>>>>> Add test with mocha and chai
     }
     if (!_reporter) {
       throw new Error('invalid reporter "' + reporter + '"');
@@ -1508,9 +1681,15 @@ Mocha.prototype._growl = function (runner, reporter) {
       notify(msg, { name: 'mocha', title: 'Failed', image: image('error') });
     } else {
       notify(stats.passes + ' tests passed in ' + stats.duration + 'ms', {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         name: 'mocha',
         title: 'Passed',
         image: image('ok')
+=======
+	name: 'mocha',
+	title: 'Passed',
+	image: image('ok')
+>>>>>>> Add test with mocha and chai
       });
     }
   });
@@ -2148,8 +2327,13 @@ exports.list = function (failures) {
     if (err.showDiff !== false && sameType(actual, expected) && expected !== undefined) {
       escape = false;
       if (!(utils.isString(actual) && utils.isString(expected))) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         err.actual = actual = utils.stringify(actual);
         err.expected = expected = utils.stringify(expected);
+=======
+	err.actual = actual = utils.stringify(actual);
+	err.expected = expected = utils.stringify(expected);
+>>>>>>> Add test with mocha and chai
       }
 
       fmt = color('error title', '  %s) %s:\n%s') + color('error stack', '\n%s\n');
@@ -2157,9 +2341,15 @@ exports.list = function (failures) {
       msg = '\n      ' + color('error message', match ? match[1] : msg);
 
       if (exports.inlineDiffs) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         msg += inlineDiff(err, escape);
       } else {
         msg += unifiedDiff(err, escape);
+=======
+	msg += inlineDiff(err, escape);
+      } else {
+	msg += unifiedDiff(err, escape);
+>>>>>>> Add test with mocha and chai
       }
     }
 
@@ -2737,9 +2927,15 @@ function HTML (runner) {
     if (test.err.stack) {
       var indexOfMessage = test.err.stack.indexOf(test.err.message);
       if (indexOfMessage === -1) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         stackString = test.err.stack;
       } else {
         stackString = test.err.stack.substr(test.err.message.length + indexOfMessage);
+=======
+	stackString = test.err.stack;
+      } else {
+	stackString = test.err.stack.substr(test.err.message.length + indexOfMessage);
+>>>>>>> Add test with mocha and chai
       }
     } else if (test.err.sourceURL && test.err.line !== undefined) {
       // Safari doesn't give you a stack. Let's at least provide a source line.
@@ -2750,7 +2946,11 @@ function HTML (runner) {
 
     if (test.err.htmlMessage && stackString) {
       el.appendChild(fragment('<div class="html-error">%s\n<pre class="error">%e</pre></div>',
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         test.err.htmlMessage, stackString));
+=======
+	test.err.htmlMessage, stackString));
+>>>>>>> Add test with mocha and chai
     } else if (test.err.htmlMessage) {
       el.appendChild(fragment('<div class="html-error">%s</div>', test.err.htmlMessage));
     } else {
@@ -3331,12 +3531,21 @@ function Markdown (runner) {
     var link;
     for (var key in obj) {
       if (key === 'suite') {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         continue;
       }
       if (key !== SUITE_PREFIX) {
         link = ' - [' + key.substring(1) + ']';
         link += '(#' + utils.slug(obj[key].suite.fullTitle()) + ')\n';
         buf += Array(level).join('  ') + link;
+=======
+	continue;
+      }
+      if (key !== SUITE_PREFIX) {
+	link = ' - [' + key.substring(1) + ']';
+	link += '(#' + utils.slug(obj[key].suite.fullTitle()) + ')\n';
+	buf += Array(level).join('  ') + link;
+>>>>>>> Add test with mocha and chai
       }
       buf += stringifyTOC(obj[key], level);
     }
@@ -3840,6 +4049,7 @@ function Spec (runner) {
     var fmt;
     if (test.speed === 'fast') {
       fmt = indent() +
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         color('checkmark', '  ' + Base.symbols.ok) +
         color('pass', ' %s');
       console.log(fmt, test.title);
@@ -3848,6 +4058,16 @@ function Spec (runner) {
         color('checkmark', '  ' + Base.symbols.ok) +
         color('pass', ' %s') +
         color(test.speed, ' (%dms)');
+=======
+	color('checkmark', '  ' + Base.symbols.ok) +
+	color('pass', ' %s');
+      console.log(fmt, test.title);
+    } else {
+      fmt = indent() +
+	color('checkmark', '  ' + Base.symbols.ok) +
+	color('pass', ' %s') +
+	color(test.speed, ' (%dms)');
+>>>>>>> Add test with mocha and chai
       console.log(fmt, test.title, test.duration);
     }
   });
@@ -4461,6 +4681,7 @@ Runnable.prototype.run = function (fn) {
     if (result && typeof result.then === 'function') {
       self.resetTimeout();
       result
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         .then(function () {
           done();
           // Return null so libraries like bluebird do not warn about
@@ -4473,6 +4694,20 @@ Runnable.prototype.run = function (fn) {
     } else {
       if (self.asyncOnly) {
         return done(new Error('--async-only option in use without declaring `done()` or returning a promise'));
+=======
+	.then(function () {
+	  done();
+	  // Return null so libraries like bluebird do not warn about
+	  // subsequently constructed Promises.
+	  return null;
+	},
+	function (reason) {
+	  done(reason || new Error('Promise rejected with no or falsy reason'));
+	});
+    } else {
+      if (self.asyncOnly) {
+	return done(new Error('--async-only option in use without declaring `done()` or returning a promise'));
+>>>>>>> Add test with mocha and chai
       }
 
       done();
@@ -4482,6 +4717,7 @@ Runnable.prototype.run = function (fn) {
   function callFnAsync (fn) {
     var result = fn.call(ctx, function (err) {
       if (err instanceof Error || toString.call(err) === '[object Error]') {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return done(err);
       }
       if (err) {
@@ -4493,6 +4729,19 @@ Runnable.prototype.run = function (fn) {
       }
       if (result && utils.isPromise(result)) {
         return done(new Error('Resolution method is overspecified. Specify a callback *or* return a Promise; not both.'));
+=======
+	return done(err);
+      }
+      if (err) {
+	if (Object.prototype.toString.call(err) === '[object Object]') {
+	  return done(new Error('done() invoked with non-Error: ' +
+	    JSON.stringify(err)));
+	}
+	return done(new Error('done() invoked with non-Error: ' + err));
+      }
+      if (result && utils.isPromise(result)) {
+	return done(new Error('Resolution method is overspecified. Specify a callback *or* return a Promise; not both.'));
+>>>>>>> Add test with mocha and chai
       }
 
       done();
@@ -4807,13 +5056,18 @@ Runner.prototype.hook = function (name, fn) {
 
     if (!hook.listeners('error').length) {
       hook.on('error', function (err) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         self.failHook(hook, err);
+=======
+	self.failHook(hook, err);
+>>>>>>> Add test with mocha and chai
       });
     }
 
     hook.run(function (err) {
       var testError = hook.error();
       if (testError) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         self.fail(self.test, testError);
       }
       if (err) {
@@ -4833,6 +5087,27 @@ Runner.prototype.hook = function (name, fn) {
           // stop executing hooks, notify callee of hook err
           return fn(err);
         }
+=======
+	self.fail(self.test, testError);
+      }
+      if (err) {
+	if (err instanceof Pending) {
+	  if (name === 'beforeEach' || name === 'afterEach') {
+	    self.test.pending = true;
+	  } else {
+	    utils.forEach(suite.tests, function (test) {
+	      test.pending = true;
+	    });
+	    // a pending hook won't be executed twice.
+	    hook.pending = true;
+	  }
+	} else {
+	  self.failHook(hook, err);
+
+	  // stop executing hooks, notify callee of hook err
+	  return fn(err);
+	}
+>>>>>>> Add test with mocha and chai
       }
       self.emit('hook end', hook);
       delete hook.ctx.currentTest;
@@ -4868,9 +5143,15 @@ Runner.prototype.hooks = function (name, suites, fn) {
 
     self.hook(name, function (err) {
       if (err) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         var errSuite = self.suite;
         self.suite = orig;
         return fn(err, errSuite);
+=======
+	var errSuite = self.suite;
+	self.suite = orig;
+	return fn(err, errSuite);
+>>>>>>> Add test with mocha and chai
       }
 
       next(suites.pop());
@@ -4974,6 +5255,7 @@ Runner.prototype.runTests = function (suite, fn) {
     if (self.suite) {
       // call hookUp afterEach
       self.hookUp('afterEach', function (err2, errSuite2) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         self.suite = orig;
         // some hooks may fail even now
         if (err2) {
@@ -4981,6 +5263,15 @@ Runner.prototype.runTests = function (suite, fn) {
         }
         // report error suite
         fn(errSuite);
+=======
+	self.suite = orig;
+	// some hooks may fail even now
+	if (err2) {
+	  return hookErr(err2, errSuite2, true);
+	}
+	// report error suite
+	fn(errSuite);
+>>>>>>> Add test with mocha and chai
       });
     } else {
       // there is no need calling other 'after each' hooks
@@ -5026,9 +5317,15 @@ Runner.prototype.runTests = function (suite, fn) {
       // test suite don't do any immediate recursive loops. Thus,
       // allowing a JS runtime to breathe.
       if (self._grep !== self._defaultGrep) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         Runner.immediately(next);
       } else {
         next();
+=======
+	Runner.immediately(next);
+      } else {
+	next();
+>>>>>>> Add test with mocha and chai
       }
       return;
     }
@@ -5043,6 +5340,7 @@ Runner.prototype.runTests = function (suite, fn) {
     self.emit('test', self.test = test);
     self.hookDown('beforeEach', function (err, errSuite) {
       if (test.isPending()) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         self.emit('pending', test);
         self.emit('test end', test);
         return next();
@@ -5082,6 +5380,47 @@ Runner.prototype.runTests = function (suite, fn) {
         self.emit('pass', test);
         self.emit('test end', test);
         self.hookUp('afterEach', next);
+=======
+	self.emit('pending', test);
+	self.emit('test end', test);
+	return next();
+      }
+      if (err) {
+	return hookErr(err, errSuite, false);
+      }
+      self.currentRunnable = self.test;
+      self.runTest(function (err) {
+	test = self.test;
+	if (err) {
+	  var retry = test.currentRetry();
+	  if (err instanceof Pending) {
+	    test.pending = true;
+	    self.emit('pending', test);
+	  } else if (retry < test.retries()) {
+	    var clonedTest = test.clone();
+	    clonedTest.currentRetry(retry + 1);
+	    tests.unshift(clonedTest);
+
+	    // Early return + hook trigger so that it doesn't
+	    // increment the count wrong
+	    return self.hookUp('afterEach', next);
+	  } else {
+	    self.fail(test, err);
+	  }
+	  self.emit('test end', test);
+
+	  if (err instanceof Pending) {
+	    return next();
+	  }
+
+	  return self.hookUp('afterEach', next);
+	}
+
+	test.state = 'passed';
+	self.emit('pass', test);
+	self.emit('test end', test);
+	self.hookUp('afterEach', next);
+>>>>>>> Add test with mocha and chai
       });
     });
   }
@@ -5116,9 +5455,15 @@ Runner.prototype.runSuite = function (suite, fn) {
     if (errSuite) {
       // current suite failed on a hook from errSuite
       if (errSuite === suite) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         // if errSuite is current suite
         // continue to the next sibling suite
         return done();
+=======
+	// if errSuite is current suite
+	// continue to the next sibling suite
+	return done();
+>>>>>>> Add test with mocha and chai
       }
       // errSuite is among the parents of current suite
       // stop execution of errSuite and all sub-suites
@@ -5139,7 +5484,11 @@ Runner.prototype.runSuite = function (suite, fn) {
     // See comment in `this.runTests()` for more information.
     if (self._grep !== self._defaultGrep) {
       Runner.immediately(function () {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         self.runSuite(curr, next);
+=======
+	self.runSuite(curr, next);
+>>>>>>> Add test with mocha and chai
       });
     } else {
       self.runSuite(curr, next);
@@ -5161,8 +5510,13 @@ Runner.prototype.runSuite = function (suite, fn) {
       delete self.test;
 
       self.hook('afterAll', function () {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         self.emit('suite end', suite);
         fn(errSuite);
+=======
+	self.emit('suite end', suite);
+	fn(errSuite);
+>>>>>>> Add test with mocha and chai
       });
     }
   }
@@ -5377,7 +5731,11 @@ function filterOnly (suite) {
       // If there are other `only` tests/suites nested in the current `only` suite, then filter that `only` suite.
       // Otherwise, all of the tests on this `only` suite should be run, so don't filter it.
       if (hasOnly(onlySuite)) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         filterOnly(onlySuite);
+=======
+	filterOnly(onlySuite);
+>>>>>>> Add test with mocha and chai
       }
     });
     // Run the `only` suites, as well as any other suites that have `only` tests/suites as descendants.
@@ -5435,7 +5793,11 @@ function filterLeaks (ok, globals) {
 
     var matched = filter(ok, function (ok) {
       if (~ok.indexOf('*')) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return key.indexOf(ok.split('*')[0]) === 0;
+=======
+	return key.indexOf(ok.split('*')[0]) === 0;
+>>>>>>> Add test with mocha and chai
       }
       return key === ok;
     });
@@ -6161,7 +6523,11 @@ exports.watch = function (files, fn) {
     debug('file %s', file);
     watchFile(file, options, function (curr, prev) {
       if (prev.mtime < curr.mtime) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         fn(file);
+=======
+	fn(file);
+>>>>>>> Add test with mocha and chai
       }
     });
   });
@@ -6222,9 +6588,15 @@ exports.files = function (dir, ext, ret) {
     .forEach(function (path) {
       path = join(dir, path);
       if (lstatSync(path).isDirectory()) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         exports.files(path, ext, ret);
       } else if (path.match(re)) {
         ret.push(path);
+=======
+	exports.files(path, ext, ret);
+      } else if (path.match(re)) {
+	ret.push(path);
+>>>>>>> Add test with mocha and chai
       }
     });
 
@@ -6413,15 +6785,24 @@ exports.stringify = function (value) {
       var json = value.toJSON();
       // Based on the toJSON result
       return jsonStringify(json.data && json.type ? json.data : json, 2)
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         .replace(/,(\n|$)/g, '$1');
+=======
+	.replace(/,(\n|$)/g, '$1');
+>>>>>>> Add test with mocha and chai
     }
 
     // IE7/IE8 has a bizarre String constructor; needs to be coerced
     // into an array and back to obj.
     if (typeHint === 'string' && typeof value === 'object') {
       value = reduce(value.split(''), function (acc, char, idx) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         acc[idx] = char;
         return acc;
+=======
+	acc[idx] = char;
+	return acc;
+>>>>>>> Add test with mocha and chai
       }, {});
       typeHint = 'object';
     } else {
@@ -6467,16 +6848,26 @@ function jsonStringify (object, spaces, depth) {
     switch (type(val)) {
       case 'null':
       case 'undefined':
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         val = '[' + val + ']';
         break;
       case 'array':
       case 'object':
         val = jsonStringify(val, spaces, depth + 1);
         break;
+=======
+	val = '[' + val + ']';
+	break;
+      case 'array':
+      case 'object':
+	val = jsonStringify(val, spaces, depth + 1);
+	break;
+>>>>>>> Add test with mocha and chai
       case 'boolean':
       case 'regexp':
       case 'symbol':
       case 'number':
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         val = val === 0 && (1 / val) === -Infinity // `-0`
           ? '-0'
           : val.toString();
@@ -6500,6 +6891,31 @@ function jsonStringify (object, spaces, depth) {
         val = (val === '[Function]' || val === '[Circular]')
           ? val
           : JSON.stringify(val); // string
+=======
+	val = val === 0 && (1 / val) === -Infinity // `-0`
+	  ? '-0'
+	  : val.toString();
+	break;
+      case 'date':
+	var sDate;
+	if (isNaN(val.getTime())) { // Invalid date
+	  sDate = val.toString();
+	} else {
+	  sDate = val.toISOString ? val.toISOString() : toISOString(val);
+	}
+	val = '[Date: ' + sDate + ']';
+	break;
+      case 'buffer':
+	var json = val.toJSON();
+	// Based on the toJSON result
+	json = json.data && json.type ? json.data : json;
+	val = '[Buffer: ' + jsonStringify(json, 2, depth + 1) + ']';
+	break;
+      default:
+	val = (val === '[Function]' || val === '[Circular]')
+	  ? val
+	  : JSON.stringify(val); // string
+>>>>>>> Add test with mocha and chai
     }
     return val;
   }
@@ -6576,14 +6992,21 @@ exports.canonicalize = function canonicalize (value, stack, typeHint) {
       break;
     case 'array':
       withStack(value, function () {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         canonicalizedObj = exports.map(value, function (item) {
           return exports.canonicalize(item, stack);
         });
+=======
+	canonicalizedObj = exports.map(value, function (item) {
+	  return exports.canonicalize(item, stack);
+	});
+>>>>>>> Add test with mocha and chai
       });
       break;
     case 'function':
       /* eslint-disable guard-for-in */
       for (prop in value) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         canonicalizedObj = {};
         break;
       }
@@ -6591,14 +7014,29 @@ exports.canonicalize = function canonicalize (value, stack, typeHint) {
       if (!canonicalizedObj) {
         canonicalizedObj = emptyRepresentation(value, typeHint);
         break;
+=======
+	canonicalizedObj = {};
+	break;
+      }
+      /* eslint-enable guard-for-in */
+      if (!canonicalizedObj) {
+	canonicalizedObj = emptyRepresentation(value, typeHint);
+	break;
+>>>>>>> Add test with mocha and chai
       }
     /* falls through */
     case 'object':
       canonicalizedObj = canonicalizedObj || {};
       withStack(value, function () {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         exports.forEach(exports.keys(value).sort(), function (key) {
           canonicalizedObj[key] = exports.canonicalize(value[key], stack);
         });
+=======
+	exports.forEach(exports.keys(value).sort(), function (key) {
+	  canonicalizedObj[key] = exports.canonicalize(value[key], stack);
+	});
+>>>>>>> Add test with mocha and chai
       });
       break;
     case 'date':
@@ -6634,7 +7072,11 @@ exports.lookupFiles = function lookupFiles (path, extensions, recursive) {
     } else {
       files = glob.sync(path);
       if (!files.length) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         throw new Error("cannot resolve path (or pattern) '" + path + "'");
+=======
+	throw new Error("cannot resolve path (or pattern) '" + path + "'");
+>>>>>>> Add test with mocha and chai
       }
       return files;
     }
@@ -6655,10 +7097,17 @@ exports.lookupFiles = function lookupFiles (path, extensions, recursive) {
     try {
       var stat = statSync(file);
       if (stat.isDirectory()) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         if (recursive) {
           files = files.concat(lookupFiles(file, extensions, recursive));
         }
         return;
+=======
+	if (recursive) {
+	  files = files.concat(lookupFiles(file, extensions, recursive));
+	}
+	return;
+>>>>>>> Add test with mocha and chai
       }
     } catch (err) {
       // ignore error
@@ -6738,16 +7187,28 @@ exports.stackTraceFilter = function () {
 
     stack = reduce(stack, function (list, line) {
       if (isMochaInternal(line)) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return list;
       }
 
       if (is.node && isNodeInternal(line)) {
         return list;
+=======
+	return list;
+      }
+
+      if (is.node && isNodeInternal(line)) {
+	return list;
+>>>>>>> Add test with mocha and chai
       }
 
       // Clean up cwd(absolute)
       if (/\(?.+:\d+:\d+\)?$/.test(line)) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         line = line.replace(cwd, '');
+=======
+	line = line.replace(cwd, '');
+>>>>>>> Add test with mocha and chai
       }
 
       list.push(line);
@@ -7094,8 +7555,13 @@ function typedArraySupport () {
     var arr = new Uint8Array(1)
     arr.__proto__ = {__proto__: Uint8Array.prototype, foo: function () { return 42 }}
     return arr.foo() === 42 && // typed array instances can be augmented
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         typeof arr.subarray === 'function' && // chrome 9-10 lack `subarray`
         arr.subarray(1, 1).byteLength === 0 // ie10 has broken `subarray`
+=======
+	typeof arr.subarray === 'function' && // chrome 9-10 lack `subarray`
+	arr.subarray(1, 1).byteLength === 0 // ie10 has broken `subarray`
+>>>>>>> Add test with mocha and chai
   } catch (e) {
     return false
   }
@@ -7145,7 +7611,11 @@ function Buffer (arg, encodingOrOffset, length) {
   if (typeof arg === 'number') {
     if (typeof encodingOrOffset === 'string') {
       throw new Error(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         'If encoding is specified then the first argument must be a string'
+=======
+	'If encoding is specified then the first argument must be a string'
+>>>>>>> Add test with mocha and chai
       )
     }
     return allocUnsafe(this, arg)
@@ -7336,9 +7806,15 @@ function fromObject (that, obj) {
 
   if (obj) {
     if ((typeof ArrayBuffer !== 'undefined' &&
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         obj.buffer instanceof ArrayBuffer) || 'length' in obj) {
       if (typeof obj.length !== 'number' || isnan(obj.length)) {
         return createBuffer(that, 0)
+=======
+	obj.buffer instanceof ArrayBuffer) || 'length' in obj) {
+      if (typeof obj.length !== 'number' || isnan(obj.length)) {
+	return createBuffer(that, 0)
+>>>>>>> Add test with mocha and chai
       }
       return fromArrayLike(that, obj)
     }
@@ -7356,7 +7832,11 @@ function checked (length) {
   // length is NaN (which is otherwise coerced to zero.)
   if (length >= kMaxLength()) {
     throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
                          'size: 0x' + kMaxLength().toString(16) + ' bytes')
+=======
+			 'size: 0x' + kMaxLength().toString(16) + ' bytes')
+>>>>>>> Add test with mocha and chai
   }
   return length | 0
 }
@@ -7466,15 +7946,24 @@ function byteLength (string, encoding) {
       case 'ascii':
       case 'latin1':
       case 'binary':
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return len
       case 'utf8':
       case 'utf-8':
       case undefined:
         return utf8ToBytes(string).length
+=======
+	return len
+      case 'utf8':
+      case 'utf-8':
+      case undefined:
+	return utf8ToBytes(string).length
+>>>>>>> Add test with mocha and chai
       case 'ucs2':
       case 'ucs-2':
       case 'utf16le':
       case 'utf-16le':
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return len * 2
       case 'hex':
         return len >>> 1
@@ -7484,6 +7973,17 @@ function byteLength (string, encoding) {
         if (loweredCase) return utf8ToBytes(string).length // assume utf8
         encoding = ('' + encoding).toLowerCase()
         loweredCase = true
+=======
+	return len * 2
+      case 'hex':
+	return len >>> 1
+      case 'base64':
+	return base64ToBytes(string).length
+      default:
+	if (loweredCase) return utf8ToBytes(string).length // assume utf8
+	encoding = ('' + encoding).toLowerCase()
+	loweredCase = true
+>>>>>>> Add test with mocha and chai
     }
   }
 }
@@ -7529,6 +8029,7 @@ function slowToString (encoding, start, end) {
   while (true) {
     switch (encoding) {
       case 'hex':
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return hexSlice(this, start, end)
 
       case 'utf8':
@@ -7544,17 +8045,43 @@ function slowToString (encoding, start, end) {
 
       case 'base64':
         return base64Slice(this, start, end)
+=======
+	return hexSlice(this, start, end)
+
+      case 'utf8':
+      case 'utf-8':
+	return utf8Slice(this, start, end)
+
+      case 'ascii':
+	return asciiSlice(this, start, end)
+
+      case 'latin1':
+      case 'binary':
+	return latin1Slice(this, start, end)
+
+      case 'base64':
+	return base64Slice(this, start, end)
+>>>>>>> Add test with mocha and chai
 
       case 'ucs2':
       case 'ucs-2':
       case 'utf16le':
       case 'utf-16le':
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return utf16leSlice(this, start, end)
 
       default:
         if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
         encoding = (encoding + '').toLowerCase()
         loweredCase = true
+=======
+	return utf16leSlice(this, start, end)
+
+      default:
+	if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+	encoding = (encoding + '').toLowerCase()
+	loweredCase = true
+>>>>>>> Add test with mocha and chai
     }
   }
 }
@@ -7741,11 +8268,19 @@ function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
   } else if (typeof val === 'number') {
     val = val & 0xFF // Search for a byte value [0-255]
     if (Buffer.TYPED_ARRAY_SUPPORT &&
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         typeof Uint8Array.prototype.indexOf === 'function') {
       if (dir) {
         return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset)
       } else {
         return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset)
+=======
+	typeof Uint8Array.prototype.indexOf === 'function') {
+      if (dir) {
+	return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset)
+      } else {
+	return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset)
+>>>>>>> Add test with mocha and chai
       }
     }
     return arrayIndexOf(buffer, [ val ], byteOffset, encoding, dir)
@@ -7762,9 +8297,15 @@ function arrayIndexOf (arr, val, byteOffset, encoding, dir) {
   if (encoding !== undefined) {
     encoding = String(encoding).toLowerCase()
     if (encoding === 'ucs2' || encoding === 'ucs-2' ||
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         encoding === 'utf16le' || encoding === 'utf-16le') {
       if (arr.length < 2 || val.length < 2) {
         return -1
+=======
+	encoding === 'utf16le' || encoding === 'utf-16le') {
+      if (arr.length < 2 || val.length < 2) {
+	return -1
+>>>>>>> Add test with mocha and chai
       }
       indexSize = 2
       arrLength /= 2
@@ -7786,11 +8327,19 @@ function arrayIndexOf (arr, val, byteOffset, encoding, dir) {
     var foundIndex = -1
     for (i = byteOffset; i < arrLength; i++) {
       if (read(arr, i) === read(val, foundIndex === -1 ? 0 : i - foundIndex)) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         if (foundIndex === -1) foundIndex = i
         if (i - foundIndex + 1 === valLength) return foundIndex * indexSize
       } else {
         if (foundIndex !== -1) i -= i - foundIndex
         foundIndex = -1
+=======
+	if (foundIndex === -1) foundIndex = i
+	if (i - foundIndex + 1 === valLength) return foundIndex * indexSize
+      } else {
+	if (foundIndex !== -1) i -= i - foundIndex
+	foundIndex = -1
+>>>>>>> Add test with mocha and chai
       }
     }
   } else {
@@ -7798,10 +8347,17 @@ function arrayIndexOf (arr, val, byteOffset, encoding, dir) {
     for (i = byteOffset; i >= 0; i--) {
       var found = true
       for (var j = 0; j < valLength; j++) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         if (read(arr, i + j) !== read(val, j)) {
           found = false
           break
         }
+=======
+	if (read(arr, i + j) !== read(val, j)) {
+	  found = false
+	  break
+	}
+>>>>>>> Add test with mocha and chai
       }
       if (found) return i
     }
@@ -7910,6 +8466,7 @@ Buffer.prototype.write = function write (string, offset, length, encoding) {
   for (;;) {
     switch (encoding) {
       case 'hex':
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return hexWrite(this, string, offset, length)
 
       case 'utf8':
@@ -7926,17 +8483,44 @@ Buffer.prototype.write = function write (string, offset, length, encoding) {
       case 'base64':
         // Warning: maxLength not taken into account in base64Write
         return base64Write(this, string, offset, length)
+=======
+	return hexWrite(this, string, offset, length)
+
+      case 'utf8':
+      case 'utf-8':
+	return utf8Write(this, string, offset, length)
+
+      case 'ascii':
+	return asciiWrite(this, string, offset, length)
+
+      case 'latin1':
+      case 'binary':
+	return latin1Write(this, string, offset, length)
+
+      case 'base64':
+	// Warning: maxLength not taken into account in base64Write
+	return base64Write(this, string, offset, length)
+>>>>>>> Add test with mocha and chai
 
       case 'ucs2':
       case 'ucs-2':
       case 'utf16le':
       case 'utf-16le':
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return ucs2Write(this, string, offset, length)
 
       default:
         if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
         encoding = ('' + encoding).toLowerCase()
         loweredCase = true
+=======
+	return ucs2Write(this, string, offset, length)
+
+      default:
+	if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+	encoding = ('' + encoding).toLowerCase()
+	loweredCase = true
+>>>>>>> Add test with mocha and chai
     }
   }
 }
@@ -7973,6 +8557,7 @@ function utf8Slice (buf, start, end) {
       var secondByte, thirdByte, fourthByte, tempCodePoint
 
       switch (bytesPerSequence) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         case 1:
           if (firstByte < 0x80) {
             codePoint = firstByte
@@ -8007,6 +8592,42 @@ function utf8Slice (buf, start, end) {
               codePoint = tempCodePoint
             }
           }
+=======
+	case 1:
+	  if (firstByte < 0x80) {
+	    codePoint = firstByte
+	  }
+	  break
+	case 2:
+	  secondByte = buf[i + 1]
+	  if ((secondByte & 0xC0) === 0x80) {
+	    tempCodePoint = (firstByte & 0x1F) << 0x6 | (secondByte & 0x3F)
+	    if (tempCodePoint > 0x7F) {
+	      codePoint = tempCodePoint
+	    }
+	  }
+	  break
+	case 3:
+	  secondByte = buf[i + 1]
+	  thirdByte = buf[i + 2]
+	  if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80) {
+	    tempCodePoint = (firstByte & 0xF) << 0xC | (secondByte & 0x3F) << 0x6 | (thirdByte & 0x3F)
+	    if (tempCodePoint > 0x7FF && (tempCodePoint < 0xD800 || tempCodePoint > 0xDFFF)) {
+	      codePoint = tempCodePoint
+	    }
+	  }
+	  break
+	case 4:
+	  secondByte = buf[i + 1]
+	  thirdByte = buf[i + 2]
+	  fourthByte = buf[i + 3]
+	  if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80 && (fourthByte & 0xC0) === 0x80) {
+	    tempCodePoint = (firstByte & 0xF) << 0x12 | (secondByte & 0x3F) << 0xC | (thirdByte & 0x3F) << 0x6 | (fourthByte & 0x3F)
+	    if (tempCodePoint > 0xFFFF && tempCodePoint < 0x110000) {
+	      codePoint = tempCodePoint
+	    }
+	  }
+>>>>>>> Add test with mocha and chai
       }
     }
 
@@ -8635,7 +9256,11 @@ Buffer.prototype.fill = function fill (val, start, end, encoding) {
     if (val.length === 1) {
       var code = val.charCodeAt(0)
       if (code < 256) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         val = code
+=======
+	val = code
+>>>>>>> Add test with mocha and chai
       }
     }
     if (encoding !== undefined && typeof encoding !== 'string') {
@@ -8721,6 +9346,7 @@ function utf8ToBytes (string, units) {
     if (codePoint > 0xD7FF && codePoint < 0xE000) {
       // last char was a lead
       if (!leadSurrogate) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         // no lead yet
         if (codePoint > 0xDBFF) {
           // unexpected trail
@@ -8736,13 +9362,36 @@ function utf8ToBytes (string, units) {
         leadSurrogate = codePoint
 
         continue
+=======
+	// no lead yet
+	if (codePoint > 0xDBFF) {
+	  // unexpected trail
+	  if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+	  continue
+	} else if (i + 1 === length) {
+	  // unpaired lead
+	  if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+	  continue
+	}
+
+	// valid lead
+	leadSurrogate = codePoint
+
+	continue
+>>>>>>> Add test with mocha and chai
       }
 
       // 2 leads in a row
       if (codePoint < 0xDC00) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
         leadSurrogate = codePoint
         continue
+=======
+	if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+	leadSurrogate = codePoint
+	continue
+>>>>>>> Add test with mocha and chai
       }
 
       // valid surrogate pair
@@ -8761,23 +9410,41 @@ function utf8ToBytes (string, units) {
     } else if (codePoint < 0x800) {
       if ((units -= 2) < 0) break
       bytes.push(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         codePoint >> 0x6 | 0xC0,
         codePoint & 0x3F | 0x80
+=======
+	codePoint >> 0x6 | 0xC0,
+	codePoint & 0x3F | 0x80
+>>>>>>> Add test with mocha and chai
       )
     } else if (codePoint < 0x10000) {
       if ((units -= 3) < 0) break
       bytes.push(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         codePoint >> 0xC | 0xE0,
         codePoint >> 0x6 & 0x3F | 0x80,
         codePoint & 0x3F | 0x80
+=======
+	codePoint >> 0xC | 0xE0,
+	codePoint >> 0x6 & 0x3F | 0x80,
+	codePoint & 0x3F | 0x80
+>>>>>>> Add test with mocha and chai
       )
     } else if (codePoint < 0x110000) {
       if ((units -= 4) < 0) break
       bytes.push(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         codePoint >> 0x12 | 0xF0,
         codePoint >> 0xC & 0x3F | 0x80,
         codePoint >> 0x6 & 0x3F | 0x80,
         codePoint & 0x3F | 0x80
+=======
+	codePoint >> 0x12 | 0xF0,
+	codePoint >> 0xC & 0x3F | 0x80,
+	codePoint >> 0x6 & 0x3F | 0x80,
+	codePoint & 0x3F | 0x80
+>>>>>>> Add test with mocha and chai
       )
     } else {
       throw new Error('Invalid code point')
@@ -8925,11 +9592,19 @@ exports.isFunction = isFunction;
 
 function isPrimitive(arg) {
   return arg === null ||
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
          typeof arg === 'boolean' ||
          typeof arg === 'number' ||
          typeof arg === 'string' ||
          typeof arg === 'symbol' ||  // ES6 symbol
          typeof arg === 'undefined';
+=======
+	 typeof arg === 'boolean' ||
+	 typeof arg === 'number' ||
+	 typeof arg === 'string' ||
+	 typeof arg === 'symbol' ||  // ES6 symbol
+	 typeof arg === 'undefined';
+>>>>>>> Add test with mocha and chai
 }
 exports.isPrimitive = isPrimitive;
 
@@ -9049,12 +9724,21 @@ Diff.prototype = { /*istanbul ignore start*/
 
     function done(value) {
       if (callback) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         setTimeout(function () {
           callback(undefined, value);
         }, 0);
         return true;
       } else {
         return value;
+=======
+	setTimeout(function () {
+	  callback(undefined, value);
+	}, 0);
+	return true;
+      } else {
+	return value;
+>>>>>>> Add test with mocha and chai
       }
     }
 
@@ -9066,7 +9750,11 @@ Diff.prototype = { /*istanbul ignore start*/
     newString = this.removeEmpty(this.tokenize(newString));
 
     var newLen = newString.length,
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         oldLen = oldString.length;
+=======
+	oldLen = oldString.length;
+>>>>>>> Add test with mocha and chai
     var editLength = 1;
     var maxEditLength = newLen + oldLen;
     var bestPath = [{ newPos: -1, components: [] }];
@@ -9081,6 +9769,7 @@ Diff.prototype = { /*istanbul ignore start*/
     // Main worker method. checks all permutations of a given edit length for acceptance.
     function execEditLength() {
       for (var diagonalPath = -1 * editLength; diagonalPath <= editLength; diagonalPath += 2) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         var basePath = /*istanbul ignore start*/void 0 /*istanbul ignore end*/;
         var addPath = bestPath[diagonalPath - 1],
             removePath = bestPath[diagonalPath + 1],
@@ -9119,6 +9808,46 @@ Diff.prototype = { /*istanbul ignore start*/
           // Otherwise track this path as a potential candidate and continue.
           bestPath[diagonalPath] = basePath;
         }
+=======
+	var basePath = /*istanbul ignore start*/void 0 /*istanbul ignore end*/;
+	var addPath = bestPath[diagonalPath - 1],
+	    removePath = bestPath[diagonalPath + 1],
+	    _oldPos = (removePath ? removePath.newPos : 0) - diagonalPath;
+	if (addPath) {
+	  // No one else is going to attempt to use this value, clear it
+	  bestPath[diagonalPath - 1] = undefined;
+	}
+
+	var canAdd = addPath && addPath.newPos + 1 < newLen,
+	    canRemove = removePath && 0 <= _oldPos && _oldPos < oldLen;
+	if (!canAdd && !canRemove) {
+	  // If this path is a terminal then prune
+	  bestPath[diagonalPath] = undefined;
+	  continue;
+	}
+
+	// Select the diagonal that we want to branch from. We select the prior
+	// path whose position in the new string is the farthest from the origin
+	// and does not pass the bounds of the diff graph
+	if (!canAdd || canRemove && addPath.newPos < removePath.newPos) {
+	  basePath = clonePath(removePath);
+	  self.pushComponent(basePath.components, undefined, true);
+	} else {
+	  basePath = addPath; // No need to clone, we've pulled it from the list
+	  basePath.newPos++;
+	  self.pushComponent(basePath.components, true, undefined);
+	}
+
+	_oldPos = self.extractCommon(basePath, newString, oldString, diagonalPath);
+
+	// If we have hit the end of both strings, then we are done
+	if (basePath.newPos + 1 >= newLen && _oldPos + 1 >= oldLen) {
+	  return done(buildValues(self, basePath.components, newString, oldString, self.useLongestToken));
+	} else {
+	  // Otherwise track this path as a potential candidate and continue.
+	  bestPath[diagonalPath] = basePath;
+	}
+>>>>>>> Add test with mocha and chai
       }
 
       editLength++;
@@ -9129,6 +9858,7 @@ Diff.prototype = { /*istanbul ignore start*/
     // is produced.
     if (callback) {
       (function exec() {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         setTimeout(function () {
           // This should not happen, but we want to be safe.
           /* istanbul ignore next */
@@ -9147,6 +9877,26 @@ Diff.prototype = { /*istanbul ignore start*/
         if (ret) {
           return ret;
         }
+=======
+	setTimeout(function () {
+	  // This should not happen, but we want to be safe.
+	  /* istanbul ignore next */
+	  if (editLength > maxEditLength) {
+	    return callback();
+	  }
+
+	  if (!execEditLength()) {
+	    exec();
+	  }
+	}, 0);
+      })();
+    } else {
+      while (editLength <= maxEditLength) {
+	var ret = execEditLength();
+	if (ret) {
+	  return ret;
+	}
+>>>>>>> Add test with mocha and chai
       }
     }
   },
@@ -9162,10 +9912,17 @@ Diff.prototype = { /*istanbul ignore start*/
   },
   /*istanbul ignore start*/ /*istanbul ignore end*/extractCommon: function extractCommon(basePath, newString, oldString, diagonalPath) {
     var newLen = newString.length,
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         oldLen = oldString.length,
         newPos = basePath.newPos,
         oldPos = newPos - diagonalPath,
         commonCount = 0;
+=======
+	oldLen = oldString.length,
+	newPos = basePath.newPos,
+	oldPos = newPos - diagonalPath,
+	commonCount = 0;
+>>>>>>> Add test with mocha and chai
     while (newPos + 1 < newLen && oldPos + 1 < oldLen && this.equals(newString[newPos + 1], oldString[oldPos + 1])) {
       newPos++;
       oldPos++;
@@ -9186,7 +9943,11 @@ Diff.prototype = { /*istanbul ignore start*/
     var ret = [];
     for (var i = 0; i < array.length; i++) {
       if (array[i]) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         ret.push(array[i]);
+=======
+	ret.push(array[i]);
+>>>>>>> Add test with mocha and chai
       }
     }
     return ret;
@@ -9212,6 +9973,7 @@ function buildValues(diff, components, newString, oldString, useLongestToken) {
     var component = components[componentPos];
     if (!component.removed) {
       if (!component.added && useLongestToken) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         var value = newString.slice(newPos, newPos + component.count);
         value = value.map(function (value, i) {
           var oldValue = oldString[oldPos + i];
@@ -9221,12 +9983,27 @@ function buildValues(diff, components, newString, oldString, useLongestToken) {
         component.value = diff.join(value);
       } else {
         component.value = diff.join(newString.slice(newPos, newPos + component.count));
+=======
+	var value = newString.slice(newPos, newPos + component.count);
+	value = value.map(function (value, i) {
+	  var oldValue = oldString[oldPos + i];
+	  return oldValue.length > value.length ? oldValue : value;
+	});
+
+	component.value = diff.join(value);
+      } else {
+	component.value = diff.join(newString.slice(newPos, newPos + component.count));
+>>>>>>> Add test with mocha and chai
       }
       newPos += component.count;
 
       // Common case
       if (!component.added) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         oldPos += component.count;
+=======
+	oldPos += component.count;
+>>>>>>> Add test with mocha and chai
       }
     } else {
       component.value = diff.join(oldString.slice(oldPos, oldPos + component.count));
@@ -9236,9 +10013,15 @@ function buildValues(diff, components, newString, oldString, useLongestToken) {
       // The diffing algorithm is tied to add then remove output and this is the simplest
       // route to get the desired output with minimal overhead.
       if (componentPos && components[componentPos - 1].added) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         var tmp = components[componentPos - 1];
         components[componentPos - 1] = components[componentPos];
         components[componentPos] = tmp;
+=======
+	var tmp = components[componentPos - 1];
+	components[componentPos - 1] = components[componentPos];
+	components[componentPos] = tmp;
+>>>>>>> Add test with mocha and chai
       }
     }
   }
@@ -9393,11 +10176,19 @@ function canonicalize(obj, stack, replacementStack) {
     canonicalizedObj = {};
     replacementStack.push(canonicalizedObj);
     var sortedKeys = [],
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         key = /*istanbul ignore start*/void 0 /*istanbul ignore end*/;
     for (key in obj) {
       /* istanbul ignore else */
       if (obj.hasOwnProperty(key)) {
         sortedKeys.push(key);
+=======
+	key = /*istanbul ignore start*/void 0 /*istanbul ignore end*/;
+    for (key in obj) {
+      /* istanbul ignore else */
+      if (obj.hasOwnProperty(key)) {
+	sortedKeys.push(key);
+>>>>>>> Add test with mocha and chai
       }
     }
     sortedKeys.sort();
@@ -9451,7 +10242,11 @@ lineDiff.tokenize = function (value) {
       retLines[retLines.length - 1] += line;
     } else {
       if (this.options.ignoreWhitespace) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         line = line.trim();
+=======
+	line = line.trim();
+>>>>>>> Add test with mocha and chai
       }
       retLines.push(line);
     }
@@ -9692,6 +10487,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
   function hunkFits(hunk, toPos) {
     for (var j = 0; j < hunk.lines.length; j++) {
       var line = hunk.lines[j],
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           operation = line[0],
           content = line.substr(1);
 
@@ -9705,6 +10501,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
           }
         }
         toPos++;
+=======
+	  operation = line[0],
+	  content = line.substr(1);
+
+      if (operation === ' ' || operation === '-') {
+	// Context sanity check
+	if (!compareLine(toPos + 1, lines[toPos], operation, content)) {
+	  errorCount++;
+
+	  if (errorCount > fuzzFactor) {
+	    return false;
+	  }
+	}
+	toPos++;
+>>>>>>> Add test with mocha and chai
       }
     }
 
@@ -9714,16 +10525,27 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
   // Search best fit offsets for each hunk based on the previous ones
   for (var i = 0; i < hunks.length; i++) {
     var hunk = hunks[i],
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         maxLine = lines.length - hunk.oldLines,
         localOffset = 0,
         toPos = offset + hunk.oldStart - 1;
+=======
+	maxLine = lines.length - hunk.oldLines,
+	localOffset = 0,
+	toPos = offset + hunk.oldStart - 1;
+>>>>>>> Add test with mocha and chai
 
     var iterator = /*istanbul ignore start*/(0, _distanceIterator2['default']) /*istanbul ignore end*/(toPos, minLine, maxLine);
 
     for (; localOffset !== undefined; localOffset = iterator()) {
       if (hunkFits(hunk, toPos + localOffset)) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         hunk.offset = offset += localOffset;
         break;
+=======
+	hunk.offset = offset += localOffset;
+	break;
+>>>>>>> Add test with mocha and chai
       }
     }
 
@@ -9739,13 +10561,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
   // Apply patch hunks
   for (var _i = 0; _i < hunks.length; _i++) {
     var _hunk = hunks[_i],
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         _toPos = _hunk.offset + _hunk.newStart - 1;
+=======
+	_toPos = _hunk.offset + _hunk.newStart - 1;
+>>>>>>> Add test with mocha and chai
     if (_hunk.newLines == 0) {
       _toPos++;
     }
 
     for (var j = 0; j < _hunk.lines.length; j++) {
       var line = _hunk.lines[j],
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           operation = line[0],
           content = line.substr(1),
           delimiter = _hunk.linedelimiters[j];
@@ -9768,6 +10595,30 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
             addEOFNL = true;
           }
         }
+=======
+	  operation = line[0],
+	  content = line.substr(1),
+	  delimiter = _hunk.linedelimiters[j];
+
+      if (operation === ' ') {
+	_toPos++;
+      } else if (operation === '-') {
+	lines.splice(_toPos, 1);
+	delimiters.splice(_toPos, 1);
+	/* istanbul ignore else */
+      } else if (operation === '+') {
+	  lines.splice(_toPos, 0, content);
+	  delimiters.splice(_toPos, 0, delimiter);
+	  _toPos++;
+	} else if (operation === '\\') {
+	  var previousOperation = _hunk.lines[j - 1] ? _hunk.lines[j - 1][0] : null;
+	  if (previousOperation === '+') {
+	    removeEOFNL = true;
+	  } else if (previousOperation === '-') {
+	    addEOFNL = true;
+	  }
+	}
+>>>>>>> Add test with mocha and chai
     }
   }
 
@@ -9802,16 +10653,28 @@ function applyPatches(uniDiff, options) {
 
     options.loadFile(index, function (err, data) {
       if (err) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return options.complete(err);
+=======
+	return options.complete(err);
+>>>>>>> Add test with mocha and chai
       }
 
       var updatedContent = applyPatch(data, index, options);
       options.patched(index, updatedContent, function (err) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         if (err) {
           return options.complete(err);
         }
 
         processIndex();
+=======
+	if (err) {
+	  return options.complete(err);
+	}
+
+	processIndex();
+>>>>>>> Add test with mocha and chai
       });
     });
   }
@@ -9858,7 +10721,11 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   /*istanbul ignore start*/
   var _loop = function _loop( /*istanbul ignore end*/i) {
     var current = diff[i],
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         lines = current.lines || current.value.replace(/\n$/, '').split('\n');
+=======
+	lines = current.lines || current.value.replace(/\n$/, '').split('\n');
+>>>>>>> Add test with mocha and chai
     current.lines = lines;
 
     if (current.added || current.removed) {
@@ -9868,6 +10735,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       /*istanbul ignore end*/
       // If we have previous context, start with that
       if (!oldRangeStart) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         var prev = diff[i - 1];
         oldRangeStart = oldLine;
         newRangeStart = newLine;
@@ -9877,22 +10745,44 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           oldRangeStart -= curRange.length;
           newRangeStart -= curRange.length;
         }
+=======
+	var prev = diff[i - 1];
+	oldRangeStart = oldLine;
+	newRangeStart = newLine;
+
+	if (prev) {
+	  curRange = options.context > 0 ? contextLines(prev.lines.slice(-options.context)) : [];
+	  oldRangeStart -= curRange.length;
+	  newRangeStart -= curRange.length;
+	}
+>>>>>>> Add test with mocha and chai
       }
 
       // Output our changes
       /*istanbul ignore start*/(_curRange = /*istanbul ignore end*/curRange).push. /*istanbul ignore start*/apply /*istanbul ignore end*/( /*istanbul ignore start*/_curRange /*istanbul ignore end*/, /*istanbul ignore start*/_toConsumableArray( /*istanbul ignore end*/lines.map(function (entry) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return (current.added ? '+' : '-') + entry;
+=======
+	return (current.added ? '+' : '-') + entry;
+>>>>>>> Add test with mocha and chai
       })));
 
       // Track the updated file position
       if (current.added) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         newLine += lines.length;
       } else {
         oldLine += lines.length;
+=======
+	newLine += lines.length;
+      } else {
+	oldLine += lines.length;
+>>>>>>> Add test with mocha and chai
       }
     } else {
       // Identical context lines. Track line changes
       if (oldRangeStart) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         // Close out any changes that have been output (or join overlapping)
         if (lines.length <= options.context * 2 && i < diff.length - 2) {
           /*istanbul ignore start*/
@@ -9934,6 +10824,49 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           newRangeStart = 0;
           curRange = [];
         }
+=======
+	// Close out any changes that have been output (or join overlapping)
+	if (lines.length <= options.context * 2 && i < diff.length - 2) {
+	  /*istanbul ignore start*/
+	  var _curRange2;
+
+	  /*istanbul ignore end*/
+	  // Overlapping
+	  /*istanbul ignore start*/(_curRange2 = /*istanbul ignore end*/curRange).push. /*istanbul ignore start*/apply /*istanbul ignore end*/( /*istanbul ignore start*/_curRange2 /*istanbul ignore end*/, /*istanbul ignore start*/_toConsumableArray( /*istanbul ignore end*/contextLines(lines)));
+	} else {
+	  /*istanbul ignore start*/
+	  var _curRange3;
+
+	  /*istanbul ignore end*/
+	  // end the range and output
+	  var contextSize = Math.min(lines.length, options.context);
+	  /*istanbul ignore start*/(_curRange3 = /*istanbul ignore end*/curRange).push. /*istanbul ignore start*/apply /*istanbul ignore end*/( /*istanbul ignore start*/_curRange3 /*istanbul ignore end*/, /*istanbul ignore start*/_toConsumableArray( /*istanbul ignore end*/contextLines(lines.slice(0, contextSize))));
+
+	  var hunk = {
+	    oldStart: oldRangeStart,
+	    oldLines: oldLine - oldRangeStart + contextSize,
+	    newStart: newRangeStart,
+	    newLines: newLine - newRangeStart + contextSize,
+	    lines: curRange
+	  };
+	  if (i >= diff.length - 2 && lines.length <= options.context) {
+	    // EOF is inside this hunk
+	    var oldEOFNewline = /\n$/.test(oldStr);
+	    var newEOFNewline = /\n$/.test(newStr);
+	    if (lines.length == 0 && !oldEOFNewline) {
+	      // special case: old has no eol and no trailing context; no-nl can end up before adds
+	      curRange.splice(hunk.oldLines, 0, '\\ No newline at end of file');
+	    } else if (!oldEOFNewline || !newEOFNewline) {
+	      curRange.push('\\ No newline at end of file');
+	    }
+	  }
+	  hunks.push(hunk);
+
+	  oldRangeStart = 0;
+	  newRangeStart = 0;
+	  curRange = [];
+	}
+>>>>>>> Add test with mocha and chai
       }
       oldLine += lines.length;
       newLine += lines.length;
@@ -10000,13 +10933,21 @@ function parsePatch(uniDiff) {
 
       // File header found, end parsing diff metadata
       if (/^(\-\-\-|\+\+\+|@@)\s/.test(line)) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         break;
+=======
+	break;
+>>>>>>> Add test with mocha and chai
       }
 
       // Diff index
       var header = /^(?:Index:|diff(?: -r \w+)+)\s+(.+?)\s*$/.exec(line);
       if (header) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         index.index = header[1];
+=======
+	index.index = header[1];
+>>>>>>> Add test with mocha and chai
       }
 
       i++;
@@ -10024,6 +10965,7 @@ function parsePatch(uniDiff) {
       var _line = diffstr[i];
 
       if (/^(Index:|diff|\-\-\-|\+\+\+)\s/.test(_line)) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         break;
       } else if (/^@@/.test(_line)) {
         index.hunks.push(parseHunk());
@@ -10032,6 +10974,16 @@ function parsePatch(uniDiff) {
         throw new Error('Unknown line ' + (i + 1) + ' ' + JSON.stringify(_line));
       } else {
         i++;
+=======
+	break;
+      } else if (/^@@/.test(_line)) {
+	index.hunks.push(parseHunk());
+      } else if (_line && options.strict) {
+	// Ignore unexpected content unless in strict mode
+	throw new Error('Unknown line ' + (i + 1) + ' ' + JSON.stringify(_line));
+      } else {
+	i++;
+>>>>>>> Add test with mocha and chai
       }
     }
   }
@@ -10054,8 +11006,13 @@ function parsePatch(uniDiff) {
   // This assumes that we are at the start of a hunk.
   function parseHunk() {
     var chunkHeaderIndex = i,
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         chunkHeaderLine = diffstr[i++],
         chunkHeader = chunkHeaderLine.split(/@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@/);
+=======
+	chunkHeaderLine = diffstr[i++],
+	chunkHeader = chunkHeaderLine.split(/@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@/);
+>>>>>>> Add test with mocha and chai
 
     var hunk = {
       oldStart: +chunkHeader[1],
@@ -10067,16 +11024,25 @@ function parsePatch(uniDiff) {
     };
 
     var addCount = 0,
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         removeCount = 0;
+=======
+	removeCount = 0;
+>>>>>>> Add test with mocha and chai
     for (; i < diffstr.length; i++) {
       // Lines starting with '---' could be mistaken for the "remove line" operation
       // But they could be the header for the next file. Therefore prune such cases out.
       if (diffstr[i].indexOf('--- ') === 0 && i + 2 < diffstr.length && diffstr[i + 1].indexOf('+++ ') === 0 && diffstr[i + 2].indexOf('@@') === 0) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         break;
+=======
+	break;
+>>>>>>> Add test with mocha and chai
       }
       var operation = diffstr[i][0];
 
       if (operation === '+' || operation === '-' || operation === ' ' || operation === '\\') {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         hunk.lines.push(diffstr[i]);
         hunk.linedelimiters.push(delimiters[i] || '\n');
 
@@ -10090,6 +11056,21 @@ function parsePatch(uniDiff) {
         }
       } else {
         break;
+=======
+	hunk.lines.push(diffstr[i]);
+	hunk.linedelimiters.push(delimiters[i] || '\n');
+
+	if (operation === '+') {
+	  addCount++;
+	} else if (operation === '-') {
+	  removeCount++;
+	} else if (operation === ' ') {
+	  addCount++;
+	  removeCount++;
+	}
+      } else {
+	break;
+>>>>>>> Add test with mocha and chai
       }
     }
 
@@ -10104,10 +11085,17 @@ function parsePatch(uniDiff) {
     // Perform optional sanity checking
     if (options.strict) {
       if (addCount !== hunk.newLines) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         throw new Error('Added line count did not match for hunk at line ' + (chunkHeaderIndex + 1));
       }
       if (removeCount !== hunk.oldLines) {
         throw new Error('Removed line count did not match for hunk at line ' + (chunkHeaderIndex + 1));
+=======
+	throw new Error('Added line count did not match for hunk at line ' + (chunkHeaderIndex + 1));
+      }
+      if (removeCount !== hunk.oldLines) {
+	throw new Error('Removed line count did not match for hunk at line ' + (chunkHeaderIndex + 1));
+>>>>>>> Add test with mocha and chai
       }
     }
 
@@ -10136,15 +11124,25 @@ exports["default"] = /*istanbul ignore end*/function (start, minLine, maxLine) {
   return function iterator() {
     if (wantForward && !forwardExhausted) {
       if (backwardExhausted) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         localOffset++;
       } else {
         wantForward = false;
+=======
+	localOffset++;
+      } else {
+	wantForward = false;
+>>>>>>> Add test with mocha and chai
       }
 
       // Check if trying to fit beyond text length, and if not, check it fits
       // after offset location (or desired location on first iteration)
       if (start + localOffset <= maxLine) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return localOffset;
+=======
+	return localOffset;
+>>>>>>> Add test with mocha and chai
       }
 
       forwardExhausted = true;
@@ -10152,13 +11150,21 @@ exports["default"] = /*istanbul ignore end*/function (start, minLine, maxLine) {
 
     if (!backwardExhausted) {
       if (!forwardExhausted) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         wantForward = true;
+=======
+	wantForward = true;
+>>>>>>> Add test with mocha and chai
       }
 
       // Check if trying to fit before text beginning, and if not, check it fits
       // before offset location
       if (minLine <= start - localOffset) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return -localOffset++;
+=======
+	return -localOffset++;
+>>>>>>> Add test with mocha and chai
       }
 
       backwardExhausted = true;
@@ -10183,7 +11189,11 @@ function generateOptions(options, defaults) {
     for (var name in options) {
       /* istanbul ignore else */
       if (options.hasOwnProperty(name)) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         defaults[name] = options[name];
+=======
+	defaults[name] = options[name];
+>>>>>>> Add test with mocha and chai
       }
     }
   }
@@ -10260,6 +11270,7 @@ EventEmitter.prototype.emit = function(type) {
   // If there is no 'error' event listener then throw.
   if (type === 'error') {
     if (!this._events.error ||
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         (isObject(this._events.error) && !this._events.error.length)) {
       er = arguments[1];
       if (er instanceof Error) {
@@ -10269,6 +11280,17 @@ EventEmitter.prototype.emit = function(type) {
         var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
         err.context = er;
         throw err;
+=======
+	(isObject(this._events.error) && !this._events.error.length)) {
+      er = arguments[1];
+      if (er instanceof Error) {
+	throw er; // Unhandled 'error' event
+      } else {
+	// At least give some kind of context to the user
+	var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
+	err.context = er;
+	throw err;
+>>>>>>> Add test with mocha and chai
       }
     }
   }
@@ -10282,6 +11304,7 @@ EventEmitter.prototype.emit = function(type) {
     switch (arguments.length) {
       // fast cases
       case 1:
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         handler.call(this);
         break;
       case 2:
@@ -10294,6 +11317,20 @@ EventEmitter.prototype.emit = function(type) {
       default:
         args = Array.prototype.slice.call(arguments, 1);
         handler.apply(this, args);
+=======
+	handler.call(this);
+	break;
+      case 2:
+	handler.call(this, arguments[1]);
+	break;
+      case 3:
+	handler.call(this, arguments[1], arguments[2]);
+	break;
+      // slower
+      default:
+	args = Array.prototype.slice.call(arguments, 1);
+	handler.apply(this, args);
+>>>>>>> Add test with mocha and chai
     }
   } else if (isObject(handler)) {
     args = Array.prototype.slice.call(arguments, 1);
@@ -10319,8 +11356,13 @@ EventEmitter.prototype.addListener = function(type, listener) {
   // adding it to the listeners, first emit "newListener".
   if (this._events.newListener)
     this.emit('newListener', type,
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
               isFunction(listener.listener) ?
               listener.listener : listener);
+=======
+	      isFunction(listener.listener) ?
+	      listener.listener : listener);
+>>>>>>> Add test with mocha and chai
 
   if (!this._events[type])
     // Optimize the case of one listener. Don't need the extra array object.
@@ -10343,12 +11385,21 @@ EventEmitter.prototype.addListener = function(type, listener) {
     if (m && m > 0 && this._events[type].length > m) {
       this._events[type].warned = true;
       console.error('(node) warning: possible EventEmitter memory ' +
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
                     'leak detected. %d listeners added. ' +
                     'Use emitter.setMaxListeners() to increase limit.',
                     this._events[type].length);
       if (typeof console.trace === 'function') {
         // not supported in IE 10
         console.trace();
+=======
+		    'leak detected. %d listeners added. ' +
+		    'Use emitter.setMaxListeners() to increase limit.',
+		    this._events[type].length);
+      if (typeof console.trace === 'function') {
+	// not supported in IE 10
+	console.trace();
+>>>>>>> Add test with mocha and chai
       }
     }
   }
@@ -10402,9 +11453,15 @@ EventEmitter.prototype.removeListener = function(type, listener) {
   } else if (isObject(list)) {
     for (i = length; i-- > 0;) {
       if (list[i] === listener ||
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           (list[i].listener && list[i].listener === listener)) {
         position = i;
         break;
+=======
+	  (list[i].listener && list[i].listener === listener)) {
+	position = i;
+	break;
+>>>>>>> Add test with mocha and chai
       }
     }
 
@@ -10538,6 +11595,7 @@ switch(os.type()) {
   case 'Darwin':
     if (which('terminal-notifier')) {
       cmd = {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           type: "Darwin-NotificationCenter"
         , pkg: "terminal-notifier"
         , msg: '-message'
@@ -10572,12 +11630,49 @@ switch(os.type()) {
               , "Emergency"
             ]
           }
+=======
+	  type: "Darwin-NotificationCenter"
+	, pkg: "terminal-notifier"
+	, msg: '-message'
+	, title: '-title'
+	, subtitle: '-subtitle'
+	, icon: '-appIcon'
+	, sound:  '-sound'
+	, url: '-open'
+	, priority: {
+	      cmd: '-execute'
+	    , range: []
+	  }
+      };
+    } else {
+      cmd = {
+	  type: "Darwin-Growl"
+	, pkg: "growlnotify"
+	, msg: '-m'
+	, sticky: '--sticky'
+	, priority: {
+	      cmd: '--priority'
+	    , range: [
+		-2
+	      , -1
+	      , 0
+	      , 1
+	      , 2
+	      , "Very Low"
+	      , "Moderate"
+	      , "Normal"
+	      , "High"
+	      , "Emergency"
+	    ]
+	  }
+>>>>>>> Add test with mocha and chai
       };
     }
     break;
   case 'Linux':
     if (which('growl')) {
       cmd = {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           type: "Linux-Growl"
         , pkg: "growl"
         , msg: '-m'
@@ -10603,12 +11698,43 @@ switch(os.type()) {
             , "critical"
           ]
         }
+=======
+	  type: "Linux-Growl"
+	, pkg: "growl"
+	, msg: '-m'
+	, title: '-title'
+	, subtitle: '-subtitle'
+	, host: {
+	    cmd: '-H'
+	  , hostname: '192.168.33.1'
+	}
+      };
+    } else {
+      cmd = {
+	  type: "Linux"
+	, pkg: "notify-send"
+	, msg: ''
+	, sticky: '-t 0'
+	, icon: '-i'
+	, priority: {
+	    cmd: '-u'
+	  , range: [
+	      "low"
+	    , "normal"
+	    , "critical"
+	  ]
+	}
+>>>>>>> Add test with mocha and chai
       };
     }
     break;
   case 'Windows_NT':
     cmd = {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         type: "Windows"
+=======
+	type: "Windows"
+>>>>>>> Add test with mocha and chai
       , pkg: "growlnotify"
       , msg: ''
       , sticky: '/s:true'
@@ -10616,6 +11742,7 @@ switch(os.type()) {
       , icon: '/i:'
       , url: '/cu:'
       , priority: {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
             cmd: '/p:'
           , range: [
               -2
@@ -10625,6 +11752,17 @@ switch(os.type()) {
             , 2
           ]
         }
+=======
+	    cmd: '/p:'
+	  , range: [
+	      -2
+	    , -1
+	    , 0
+	    , 1
+	    , 2
+	  ]
+	}
+>>>>>>> Add test with mocha and chai
     };
     break;
 }
@@ -10681,7 +11819,11 @@ function growl(msg, options, fn) {
 
   if (options.exec) {
     cmd = {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         type: "Custom"
+=======
+	type: "Custom"
+>>>>>>> Add test with mocha and chai
       , pkg: options.exec
       , range: []
     };
@@ -10695,6 +11837,7 @@ function growl(msg, options, fn) {
   if (image = options.image) {
     switch(cmd.type) {
       case 'Darwin-Growl':
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         var flag, ext = path.extname(image).substr(1)
         flag = flag || ext == 'icns' && 'iconpath'
         flag = flag || /^[A-Z]/.test(image) && 'appIcon'
@@ -10714,6 +11857,27 @@ function growl(msg, options, fn) {
       case 'Windows':
         args.push(cmd.icon + quote(image));
         break;
+=======
+	var flag, ext = path.extname(image).substr(1)
+	flag = flag || ext == 'icns' && 'iconpath'
+	flag = flag || /^[A-Z]/.test(image) && 'appIcon'
+	flag = flag || /^png|gif|jpe?g$/.test(ext) && 'image'
+	flag = flag || ext && (image = ext) && 'icon'
+	flag = flag || 'icon'
+	args.push('--' + flag, quote(image))
+	break;
+      case 'Darwin-NotificationCenter':
+	args.push(cmd.icon, quote(image));
+	break;
+      case 'Linux':
+	args.push(cmd.icon, quote(image));
+	// libnotify defaults to sticky, set a hint for transient notifications
+	if (!options.sticky) args.push('--hint=int:transient:1');
+	break;
+      case 'Windows':
+	args.push(cmd.icon + quote(image));
+	break;
+>>>>>>> Add test with mocha and chai
     }
   }
 
@@ -10751,6 +11915,7 @@ function growl(msg, options, fn) {
       var escapedMsg = stringifiedMsg.replace(/\\n/g, '\n');
       args.push(escapedMsg);
       if (options.title) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         args.push(cmd.title);
         args.push(quote(options.title));
       }
@@ -10761,6 +11926,18 @@ function growl(msg, options, fn) {
       if (options.url) {
         args.push(cmd.url);
         args.push(quote(options.url));
+=======
+	args.push(cmd.title);
+	args.push(quote(options.title));
+      }
+      if (options.subtitle) {
+	args.push(cmd.subtitle);
+	args.push(quote(options.subtitle));
+      }
+      if (options.url) {
+	args.push(cmd.url);
+	args.push(quote(options.url));
+>>>>>>> Add test with mocha and chai
       }
       break;
     case 'Linux-Growl':
@@ -10768,16 +11945,28 @@ function growl(msg, options, fn) {
       args.push(quote(msg).replace(/\\n/g, '\n'));
       if (options.title) args.push(quote(options.title));
       if (cmd.host) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         args.push(cmd.host.cmd, cmd.host.hostname)
+=======
+	args.push(cmd.host.cmd, cmd.host.hostname)
+>>>>>>> Add test with mocha and chai
       }
       break;
     case 'Linux':
       if (options.title) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         args.push(quote(options.title));
         args.push(cmd.msg);
         args.push(quote(msg).replace(/\\n/g, '\n'));
       } else {
         args.push(quote(msg).replace(/\\n/g, '\n'));
+=======
+	args.push(quote(options.title));
+	args.push(cmd.msg);
+	args.push(quote(msg).replace(/\\n/g, '\n'));
+      } else {
+	args.push(quote(msg).replace(/\\n/g, '\n'));
+>>>>>>> Add test with mocha and chai
       }
       break;
     case 'Windows':
@@ -10787,12 +11976,21 @@ function growl(msg, options, fn) {
       break;
     case 'Custom':
       args[0] = (function(origCommand) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         var message = options.title
           ? options.title + ': ' + msg
           : msg;
         var command = origCommand.replace(/(^|[^%])%s/g, '$1' + quote(message));
         if (command === origCommand) args.push(quote(message));
         return command;
+=======
+	var message = options.title
+	  ? options.title + ': ' + msg
+	  : msg;
+	var command = origCommand.replace(/(^|[^%])%s/g, '$1' + quote(message));
+	if (command === origCommand) args.push(quote(message));
+	return command;
+>>>>>>> Add test with mocha and chai
       })(args[0]);
       break;
   }
@@ -10895,10 +12093,17 @@ if (typeof Object.create === 'function') {
     ctor.super_ = superCtor
     ctor.prototype = Object.create(superCtor.prototype, {
       constructor: {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         value: ctor,
         enumerable: false,
         writable: true,
         configurable: true
+=======
+	value: ctor,
+	enumerable: false,
+	writable: true,
+	configurable: true
+>>>>>>> Add test with mocha and chai
       }
     });
   };
@@ -10979,6 +12184,7 @@ module.exports = Array.isArray || function (arr) {
 
     // Native constructor aliases.
     var Number = context["Number"] || root["Number"],
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         String = context["String"] || root["String"],
         Object = context["Object"] || root["Object"],
         Date = context["Date"] || root["Date"],
@@ -10986,6 +12192,15 @@ module.exports = Array.isArray || function (arr) {
         TypeError = context["TypeError"] || root["TypeError"],
         Math = context["Math"] || root["Math"],
         nativeJSON = context["JSON"] || root["JSON"];
+=======
+	String = context["String"] || root["String"],
+	Object = context["Object"] || root["Object"],
+	Date = context["Date"] || root["Date"],
+	SyntaxError = context["SyntaxError"] || root["SyntaxError"],
+	TypeError = context["TypeError"] || root["TypeError"],
+	Math = context["Math"] || root["Math"],
+	nativeJSON = context["JSON"] || root["JSON"];
+>>>>>>> Add test with mocha and chai
 
     // Delegate to the native `stringify` and `parse` implementations.
     if (typeof nativeJSON == "object" && nativeJSON) {
@@ -10995,8 +12210,13 @@ module.exports = Array.isArray || function (arr) {
 
     // Convenience aliases.
     var objectProto = Object.prototype,
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         getClass = objectProto.toString,
         isProperty, forEach, undef;
+=======
+	getClass = objectProto.toString,
+	isProperty, forEach, undef;
+>>>>>>> Add test with mocha and chai
 
     // Test the `Date#getUTC*` methods. Based on work by @Yaffle.
     var isExtended = new Date(-3509827334573292);
@@ -11004,16 +12224,24 @@ module.exports = Array.isArray || function (arr) {
       // The `getUTCFullYear`, `Month`, and `Date` methods return nonsensical
       // results for certain dates in Opera >= 10.53.
       isExtended = isExtended.getUTCFullYear() == -109252 && isExtended.getUTCMonth() === 0 && isExtended.getUTCDate() === 1 &&
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         // Safari < 2.0.2 stores the internal millisecond time value correctly,
         // but clips the values returned by the date methods to the range of
         // signed 32-bit integers ([-2 ** 31, 2 ** 31 - 1]).
         isExtended.getUTCHours() == 10 && isExtended.getUTCMinutes() == 37 && isExtended.getUTCSeconds() == 6 && isExtended.getUTCMilliseconds() == 708;
+=======
+	// Safari < 2.0.2 stores the internal millisecond time value correctly,
+	// but clips the values returned by the date methods to the range of
+	// signed 32-bit integers ([-2 ** 31, 2 ** 31 - 1]).
+	isExtended.getUTCHours() == 10 && isExtended.getUTCMinutes() == 37 && isExtended.getUTCSeconds() == 6 && isExtended.getUTCMilliseconds() == 708;
+>>>>>>> Add test with mocha and chai
     } catch (exception) {}
 
     // Internal: Determines whether the native `JSON.stringify` and `parse`
     // implementations are spec-compliant. Based on work by Ken Snyder.
     function has(name) {
       if (has[name] !== undef) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         // Return cached feature test result.
         return has[name];
       }
@@ -11137,6 +12365,131 @@ module.exports = Array.isArray || function (arr) {
           }
           isSupported = parseSupported;
         }
+=======
+	// Return cached feature test result.
+	return has[name];
+      }
+      var isSupported;
+      if (name == "bug-string-char-index") {
+	// IE <= 7 doesn't support accessing string characters using square
+	// bracket notation. IE 8 only supports this for primitives.
+	isSupported = "a"[0] != "a";
+      } else if (name == "json") {
+	// Indicates whether both `JSON.stringify` and `JSON.parse` are
+	// supported.
+	isSupported = has("json-stringify") && has("json-parse");
+      } else {
+	var value, serialized = '{"a":[1,true,false,null,"\\u0000\\b\\n\\f\\r\\t"]}';
+	// Test `JSON.stringify`.
+	if (name == "json-stringify") {
+	  var stringify = exports.stringify, stringifySupported = typeof stringify == "function" && isExtended;
+	  if (stringifySupported) {
+	    // A test function object with a custom `toJSON` method.
+	    (value = function () {
+	      return 1;
+	    }).toJSON = value;
+	    try {
+	      stringifySupported =
+		// Firefox 3.1b1 and b2 serialize string, number, and boolean
+		// primitives as object literals.
+		stringify(0) === "0" &&
+		// FF 3.1b1, b2, and JSON 2 serialize wrapped primitives as object
+		// literals.
+		stringify(new Number()) === "0" &&
+		stringify(new String()) == '""' &&
+		// FF 3.1b1, 2 throw an error if the value is `null`, `undefined`, or
+		// does not define a canonical JSON representation (this applies to
+		// objects with `toJSON` properties as well, *unless* they are nested
+		// within an object or array).
+		stringify(getClass) === undef &&
+		// IE 8 serializes `undefined` as `"undefined"`. Safari <= 5.1.7 and
+		// FF 3.1b3 pass this test.
+		stringify(undef) === undef &&
+		// Safari <= 5.1.7 and FF 3.1b3 throw `Error`s and `TypeError`s,
+		// respectively, if the value is omitted entirely.
+		stringify() === undef &&
+		// FF 3.1b1, 2 throw an error if the given value is not a number,
+		// string, array, object, Boolean, or `null` literal. This applies to
+		// objects with custom `toJSON` methods as well, unless they are nested
+		// inside object or array literals. YUI 3.0.0b1 ignores custom `toJSON`
+		// methods entirely.
+		stringify(value) === "1" &&
+		stringify([value]) == "[1]" &&
+		// Prototype <= 1.6.1 serializes `[undefined]` as `"[]"` instead of
+		// `"[null]"`.
+		stringify([undef]) == "[null]" &&
+		// YUI 3.0.0b1 fails to serialize `null` literals.
+		stringify(null) == "null" &&
+		// FF 3.1b1, 2 halts serialization if an array contains a function:
+		// `[1, true, getClass, 1]` serializes as "[1,true,],". FF 3.1b3
+		// elides non-JSON values from objects and arrays, unless they
+		// define custom `toJSON` methods.
+		stringify([undef, getClass, null]) == "[null,null,null]" &&
+		// Simple serialization test. FF 3.1b1 uses Unicode escape sequences
+		// where character escape codes are expected (e.g., `\b` => `\u0008`).
+		stringify({ "a": [value, true, false, null, "\x00\b\n\f\r\t"] }) == serialized &&
+		// FF 3.1b1 and b2 ignore the `filter` and `width` arguments.
+		stringify(null, value) === "1" &&
+		stringify([1, 2], null, 1) == "[\n 1,\n 2\n]" &&
+		// JSON 2, Prototype <= 1.7, and older WebKit builds incorrectly
+		// serialize extended years.
+		stringify(new Date(-8.64e15)) == '"-271821-04-20T00:00:00.000Z"' &&
+		// The milliseconds are optional in ES 5, but required in 5.1.
+		stringify(new Date(8.64e15)) == '"+275760-09-13T00:00:00.000Z"' &&
+		// Firefox <= 11.0 incorrectly serializes years prior to 0 as negative
+		// four-digit years instead of six-digit years. Credits: @Yaffle.
+		stringify(new Date(-621987552e5)) == '"-000001-01-01T00:00:00.000Z"' &&
+		// Safari <= 5.1.5 and Opera >= 10.53 incorrectly serialize millisecond
+		// values less than 1000. Credits: @Yaffle.
+		stringify(new Date(-1)) == '"1969-12-31T23:59:59.999Z"';
+	    } catch (exception) {
+	      stringifySupported = false;
+	    }
+	  }
+	  isSupported = stringifySupported;
+	}
+	// Test `JSON.parse`.
+	if (name == "json-parse") {
+	  var parse = exports.parse;
+	  if (typeof parse == "function") {
+	    try {
+	      // FF 3.1b1, b2 will throw an exception if a bare literal is provided.
+	      // Conforming implementations should also coerce the initial argument to
+	      // a string prior to parsing.
+	      if (parse("0") === 0 && !parse(false)) {
+		// Simple parsing test.
+		value = parse(serialized);
+		var parseSupported = value["a"].length == 5 && value["a"][0] === 1;
+		if (parseSupported) {
+		  try {
+		    // Safari <= 5.1.2 and FF 3.1b1 allow unescaped tabs in strings.
+		    parseSupported = !parse('"\t"');
+		  } catch (exception) {}
+		  if (parseSupported) {
+		    try {
+		      // FF 4.0 and 4.0.1 allow leading `+` signs and leading
+		      // decimal points. FF 4.0, 4.0.1, and IE 9-10 also allow
+		      // certain octal literals.
+		      parseSupported = parse("01") !== 1;
+		    } catch (exception) {}
+		  }
+		  if (parseSupported) {
+		    try {
+		      // FF 4.0, 4.0.1, and Rhino 1.7R3-R4 allow trailing decimal
+		      // points. These environments, along with FF 3.1b1 and 2,
+		      // also allow trailing commas in JSON objects and arrays.
+		      parseSupported = parse("1.") !== 1;
+		    } catch (exception) {}
+		  }
+		}
+	      }
+	    } catch (exception) {
+	      parseSupported = false;
+	    }
+	  }
+	  isSupported = parseSupported;
+	}
+>>>>>>> Add test with mocha and chai
       }
       return has[name] = !!isSupported;
     }
@@ -11144,17 +12497,26 @@ module.exports = Array.isArray || function (arr) {
     if (!has("json")) {
       // Common `[[Class]]` name aliases.
       var functionClass = "[object Function]",
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           dateClass = "[object Date]",
           numberClass = "[object Number]",
           stringClass = "[object String]",
           arrayClass = "[object Array]",
           booleanClass = "[object Boolean]";
+=======
+	  dateClass = "[object Date]",
+	  numberClass = "[object Number]",
+	  stringClass = "[object String]",
+	  arrayClass = "[object Array]",
+	  booleanClass = "[object Boolean]";
+>>>>>>> Add test with mocha and chai
 
       // Detect incomplete support for accessing string characters by index.
       var charIndexBuggy = has("bug-string-char-index");
 
       // Define additional utility methods if the `Date` methods are buggy.
       if (!isExtended) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         var floor = Math.floor;
         // A mapping between the months of the year and the number of days between
         // January 1st and the first of the respective month.
@@ -11164,11 +12526,23 @@ module.exports = Array.isArray || function (arr) {
         var getDay = function (year, month) {
           return Months[month] + 365 * (year - 1970) + floor((year - 1969 + (month = +(month > 1))) / 4) - floor((year - 1901 + month) / 100) + floor((year - 1601 + month) / 400);
         };
+=======
+	var floor = Math.floor;
+	// A mapping between the months of the year and the number of days between
+	// January 1st and the first of the respective month.
+	var Months = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+	// Internal: Calculates the number of days between the Unix epoch and the
+	// first day of the given month.
+	var getDay = function (year, month) {
+	  return Months[month] + 365 * (year - 1970) + floor((year - 1969 + (month = +(month > 1))) / 4) - floor((year - 1901 + month) / 100) + floor((year - 1601 + month) / 400);
+	};
+>>>>>>> Add test with mocha and chai
       }
 
       // Internal: Determines if a property is a direct property of the given
       // object. Delegates to the native `Object#hasOwnProperty` method.
       if (!(isProperty = objectProto.hasOwnProperty)) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         isProperty = function (property) {
           var members = {}, constructor;
           if ((members.__proto__ = null, members.__proto__ = {
@@ -11200,11 +12574,45 @@ module.exports = Array.isArray || function (arr) {
           members = null;
           return isProperty.call(this, property);
         };
+=======
+	isProperty = function (property) {
+	  var members = {}, constructor;
+	  if ((members.__proto__ = null, members.__proto__ = {
+	    // The *proto* property cannot be set multiple times in recent
+	    // versions of Firefox and SeaMonkey.
+	    "toString": 1
+	  }, members).toString != getClass) {
+	    // Safari <= 2.0.3 doesn't implement `Object#hasOwnProperty`, but
+	    // supports the mutable *proto* property.
+	    isProperty = function (property) {
+	      // Capture and break the object's prototype chain (see section 8.6.2
+	      // of the ES 5.1 spec). The parenthesized expression prevents an
+	      // unsafe transformation by the Closure Compiler.
+	      var original = this.__proto__, result = property in (this.__proto__ = null, this);
+	      // Restore the original prototype chain.
+	      this.__proto__ = original;
+	      return result;
+	    };
+	  } else {
+	    // Capture a reference to the top-level `Object` constructor.
+	    constructor = members.constructor;
+	    // Use the `constructor` property to simulate `Object#hasOwnProperty` in
+	    // other environments.
+	    isProperty = function (property) {
+	      var parent = (this.constructor || constructor).prototype;
+	      return property in this && !(property in parent && this[property] === parent[property]);
+	    };
+	  }
+	  members = null;
+	  return isProperty.call(this, property);
+	};
+>>>>>>> Add test with mocha and chai
       }
 
       // Internal: Normalizes the `for...in` iteration algorithm across
       // environments. Each enumerated key is yielded to a `callback` function.
       forEach = function (object, callback) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         var size = 0, Properties, members, property;
 
         // Tests for bugs in the current environment's `for...in` algorithm. The
@@ -11274,6 +12682,77 @@ module.exports = Array.isArray || function (arr) {
           };
         }
         return forEach(object, callback);
+=======
+	var size = 0, Properties, members, property;
+
+	// Tests for bugs in the current environment's `for...in` algorithm. The
+	// `valueOf` property inherits the non-enumerable flag from
+	// `Object.prototype` in older versions of IE, Netscape, and Mozilla.
+	(Properties = function () {
+	  this.valueOf = 0;
+	}).prototype.valueOf = 0;
+
+	// Iterate over a new instance of the `Properties` class.
+	members = new Properties();
+	for (property in members) {
+	  // Ignore all properties inherited from `Object.prototype`.
+	  if (isProperty.call(members, property)) {
+	    size++;
+	  }
+	}
+	Properties = members = null;
+
+	// Normalize the iteration algorithm.
+	if (!size) {
+	  // A list of non-enumerable properties inherited from `Object.prototype`.
+	  members = ["valueOf", "toString", "toLocaleString", "propertyIsEnumerable", "isPrototypeOf", "hasOwnProperty", "constructor"];
+	  // IE <= 8, Mozilla 1.0, and Netscape 6.2 ignore shadowed non-enumerable
+	  // properties.
+	  forEach = function (object, callback) {
+	    var isFunction = getClass.call(object) == functionClass, property, length;
+	    var hasProperty = !isFunction && typeof object.constructor != "function" && objectTypes[typeof object.hasOwnProperty] && object.hasOwnProperty || isProperty;
+	    for (property in object) {
+	      // Gecko <= 1.0 enumerates the `prototype` property of functions under
+	      // certain conditions; IE does not.
+	      if (!(isFunction && property == "prototype") && hasProperty.call(object, property)) {
+		callback(property);
+	      }
+	    }
+	    // Manually invoke the callback for each non-enumerable property.
+	    for (length = members.length; property = members[--length]; hasProperty.call(object, property) && callback(property));
+	  };
+	} else if (size == 2) {
+	  // Safari <= 2.0.4 enumerates shadowed properties twice.
+	  forEach = function (object, callback) {
+	    // Create a set of iterated properties.
+	    var members = {}, isFunction = getClass.call(object) == functionClass, property;
+	    for (property in object) {
+	      // Store each property name to prevent double enumeration. The
+	      // `prototype` property of functions is not enumerated due to cross-
+	      // environment inconsistencies.
+	      if (!(isFunction && property == "prototype") && !isProperty.call(members, property) && (members[property] = 1) && isProperty.call(object, property)) {
+		callback(property);
+	      }
+	    }
+	  };
+	} else {
+	  // No bugs detected; use the standard `for...in` algorithm.
+	  forEach = function (object, callback) {
+	    var isFunction = getClass.call(object) == functionClass, property, isConstructor;
+	    for (property in object) {
+	      if (!(isFunction && property == "prototype") && isProperty.call(object, property) && !(isConstructor = property === "constructor")) {
+		callback(property);
+	      }
+	    }
+	    // Manually invoke the callback for the `constructor` property due to
+	    // cross-environment inconsistencies.
+	    if (isConstructor || isProperty.call(object, (property = "constructor"))) {
+	      callback(property);
+	    }
+	  };
+	}
+	return forEach(object, callback);
+>>>>>>> Add test with mocha and chai
       };
 
       // Public: Serializes a JavaScript `value` as a JSON string. The optional
@@ -11283,6 +12762,7 @@ module.exports = Array.isArray || function (arr) {
       // argument may be either a string or number that specifies the indentation
       // level of the output.
       if (!has("json-stringify")) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         // Internal: A map of control characters and their escaped equivalents.
         var Escapes = {
           92: "\\\\",
@@ -11487,10 +12967,217 @@ module.exports = Array.isArray || function (arr) {
           // (e.g., `!("" in { "": 1})`).
           return serialize("", (value = {}, value[""] = source, value), callback, properties, whitespace, "", []);
         };
+=======
+	// Internal: A map of control characters and their escaped equivalents.
+	var Escapes = {
+	  92: "\\\\",
+	  34: '\\"',
+	  8: "\\b",
+	  12: "\\f",
+	  10: "\\n",
+	  13: "\\r",
+	  9: "\\t"
+	};
+
+	// Internal: Converts `value` into a zero-padded string such that its
+	// length is at least equal to `width`. The `width` must be <= 6.
+	var leadingZeroes = "000000";
+	var toPaddedString = function (width, value) {
+	  // The `|| 0` expression is necessary to work around a bug in
+	  // Opera <= 7.54u2 where `0 == -0`, but `String(-0) !== "0"`.
+	  return (leadingZeroes + (value || 0)).slice(-width);
+	};
+
+	// Internal: Double-quotes a string `value`, replacing all ASCII control
+	// characters (characters with code unit values between 0 and 31) with
+	// their escaped equivalents. This is an implementation of the
+	// `Quote(value)` operation defined in ES 5.1 section 15.12.3.
+	var unicodePrefix = "\\u00";
+	var quote = function (value) {
+	  var result = '"', index = 0, length = value.length, useCharIndex = !charIndexBuggy || length > 10;
+	  var symbols = useCharIndex && (charIndexBuggy ? value.split("") : value);
+	  for (; index < length; index++) {
+	    var charCode = value.charCodeAt(index);
+	    // If the character is a control character, append its Unicode or
+	    // shorthand escape sequence; otherwise, append the character as-is.
+	    switch (charCode) {
+	      case 8: case 9: case 10: case 12: case 13: case 34: case 92:
+		result += Escapes[charCode];
+		break;
+	      default:
+		if (charCode < 32) {
+		  result += unicodePrefix + toPaddedString(2, charCode.toString(16));
+		  break;
+		}
+		result += useCharIndex ? symbols[index] : value.charAt(index);
+	    }
+	  }
+	  return result + '"';
+	};
+
+	// Internal: Recursively serializes an object. Implements the
+	// `Str(key, holder)`, `JO(value)`, and `JA(value)` operations.
+	var serialize = function (property, object, callback, properties, whitespace, indentation, stack) {
+	  var value, className, year, month, date, time, hours, minutes, seconds, milliseconds, results, element, index, length, prefix, result;
+	  try {
+	    // Necessary for host object support.
+	    value = object[property];
+	  } catch (exception) {}
+	  if (typeof value == "object" && value) {
+	    className = getClass.call(value);
+	    if (className == dateClass && !isProperty.call(value, "toJSON")) {
+	      if (value > -1 / 0 && value < 1 / 0) {
+		// Dates are serialized according to the `Date#toJSON` method
+		// specified in ES 5.1 section 15.9.5.44. See section 15.9.1.15
+		// for the ISO 8601 date time string format.
+		if (getDay) {
+		  // Manually compute the year, month, date, hours, minutes,
+		  // seconds, and milliseconds if the `getUTC*` methods are
+		  // buggy. Adapted from @Yaffle's `date-shim` project.
+		  date = floor(value / 864e5);
+		  for (year = floor(date / 365.2425) + 1970 - 1; getDay(year + 1, 0) <= date; year++);
+		  for (month = floor((date - getDay(year, 0)) / 30.42); getDay(year, month + 1) <= date; month++);
+		  date = 1 + date - getDay(year, month);
+		  // The `time` value specifies the time within the day (see ES
+		  // 5.1 section 15.9.1.2). The formula `(A % B + B) % B` is used
+		  // to compute `A modulo B`, as the `%` operator does not
+		  // correspond to the `modulo` operation for negative numbers.
+		  time = (value % 864e5 + 864e5) % 864e5;
+		  // The hours, minutes, seconds, and milliseconds are obtained by
+		  // decomposing the time within the day. See section 15.9.1.10.
+		  hours = floor(time / 36e5) % 24;
+		  minutes = floor(time / 6e4) % 60;
+		  seconds = floor(time / 1e3) % 60;
+		  milliseconds = time % 1e3;
+		} else {
+		  year = value.getUTCFullYear();
+		  month = value.getUTCMonth();
+		  date = value.getUTCDate();
+		  hours = value.getUTCHours();
+		  minutes = value.getUTCMinutes();
+		  seconds = value.getUTCSeconds();
+		  milliseconds = value.getUTCMilliseconds();
+		}
+		// Serialize extended years correctly.
+		value = (year <= 0 || year >= 1e4 ? (year < 0 ? "-" : "+") + toPaddedString(6, year < 0 ? -year : year) : toPaddedString(4, year)) +
+		  "-" + toPaddedString(2, month + 1) + "-" + toPaddedString(2, date) +
+		  // Months, dates, hours, minutes, and seconds should have two
+		  // digits; milliseconds should have three.
+		  "T" + toPaddedString(2, hours) + ":" + toPaddedString(2, minutes) + ":" + toPaddedString(2, seconds) +
+		  // Milliseconds are optional in ES 5.0, but required in 5.1.
+		  "." + toPaddedString(3, milliseconds) + "Z";
+	      } else {
+		value = null;
+	      }
+	    } else if (typeof value.toJSON == "function" && ((className != numberClass && className != stringClass && className != arrayClass) || isProperty.call(value, "toJSON"))) {
+	      // Prototype <= 1.6.1 adds non-standard `toJSON` methods to the
+	      // `Number`, `String`, `Date`, and `Array` prototypes. JSON 3
+	      // ignores all `toJSON` methods on these objects unless they are
+	      // defined directly on an instance.
+	      value = value.toJSON(property);
+	    }
+	  }
+	  if (callback) {
+	    // If a replacement function was provided, call it to obtain the value
+	    // for serialization.
+	    value = callback.call(object, property, value);
+	  }
+	  if (value === null) {
+	    return "null";
+	  }
+	  className = getClass.call(value);
+	  if (className == booleanClass) {
+	    // Booleans are represented literally.
+	    return "" + value;
+	  } else if (className == numberClass) {
+	    // JSON numbers must be finite. `Infinity` and `NaN` are serialized as
+	    // `"null"`.
+	    return value > -1 / 0 && value < 1 / 0 ? "" + value : "null";
+	  } else if (className == stringClass) {
+	    // Strings are double-quoted and escaped.
+	    return quote("" + value);
+	  }
+	  // Recursively serialize objects and arrays.
+	  if (typeof value == "object") {
+	    // Check for cyclic structures. This is a linear search; performance
+	    // is inversely proportional to the number of unique nested objects.
+	    for (length = stack.length; length--;) {
+	      if (stack[length] === value) {
+		// Cyclic structures cannot be serialized by `JSON.stringify`.
+		throw TypeError();
+	      }
+	    }
+	    // Add the object to the stack of traversed objects.
+	    stack.push(value);
+	    results = [];
+	    // Save the current indentation level and indent one additional level.
+	    prefix = indentation;
+	    indentation += whitespace;
+	    if (className == arrayClass) {
+	      // Recursively serialize array elements.
+	      for (index = 0, length = value.length; index < length; index++) {
+		element = serialize(index, value, callback, properties, whitespace, indentation, stack);
+		results.push(element === undef ? "null" : element);
+	      }
+	      result = results.length ? (whitespace ? "[\n" + indentation + results.join(",\n" + indentation) + "\n" + prefix + "]" : ("[" + results.join(",") + "]")) : "[]";
+	    } else {
+	      // Recursively serialize object members. Members are selected from
+	      // either a user-specified list of property names, or the object
+	      // itself.
+	      forEach(properties || value, function (property) {
+		var element = serialize(property, value, callback, properties, whitespace, indentation, stack);
+		if (element !== undef) {
+		  // According to ES 5.1 section 15.12.3: "If `gap` {whitespace}
+		  // is not the empty string, let `member` {quote(property) + ":"}
+		  // be the concatenation of `member` and the `space` character."
+		  // The "`space` character" refers to the literal space
+		  // character, not the `space` {width} argument provided to
+		  // `JSON.stringify`.
+		  results.push(quote(property) + ":" + (whitespace ? " " : "") + element);
+		}
+	      });
+	      result = results.length ? (whitespace ? "{\n" + indentation + results.join(",\n" + indentation) + "\n" + prefix + "}" : ("{" + results.join(",") + "}")) : "{}";
+	    }
+	    // Remove the object from the traversed object stack.
+	    stack.pop();
+	    return result;
+	  }
+	};
+
+	// Public: `JSON.stringify`. See ES 5.1 section 15.12.3.
+	exports.stringify = function (source, filter, width) {
+	  var whitespace, callback, properties, className;
+	  if (objectTypes[typeof filter] && filter) {
+	    if ((className = getClass.call(filter)) == functionClass) {
+	      callback = filter;
+	    } else if (className == arrayClass) {
+	      // Convert the property names array into a makeshift set.
+	      properties = {};
+	      for (var index = 0, length = filter.length, value; index < length; value = filter[index++], ((className = getClass.call(value)), className == stringClass || className == numberClass) && (properties[value] = 1));
+	    }
+	  }
+	  if (width) {
+	    if ((className = getClass.call(width)) == numberClass) {
+	      // Convert the `width` to an integer and create a string containing
+	      // `width` number of space characters.
+	      if ((width -= width % 1) > 0) {
+		for (whitespace = "", width > 10 && (width = 10); whitespace.length < width; whitespace += " ");
+	      }
+	    } else if (className == stringClass) {
+	      whitespace = width.length <= 10 ? width : width.slice(0, 10);
+	    }
+	  }
+	  // Opera <= 7.54u2 discards the values associated with empty string keys
+	  // (`""`) only if they are used directly within an object member list
+	  // (e.g., `!("" in { "": 1})`).
+	  return serialize("", (value = {}, value[""] = source, value), callback, properties, whitespace, "", []);
+	};
+>>>>>>> Add test with mocha and chai
       }
 
       // Public: Parses a JSON source string.
       if (!has("json-parse")) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         var fromCharCode = String.fromCharCode;
 
         // Internal: A map of escaped control characters and their unescaped
@@ -11804,6 +13491,321 @@ module.exports = Array.isArray || function (arr) {
           Index = Source = null;
           return callback && getClass.call(callback) == functionClass ? walk((value = {}, value[""] = result, value), "", callback) : result;
         };
+=======
+	var fromCharCode = String.fromCharCode;
+
+	// Internal: A map of escaped control characters and their unescaped
+	// equivalents.
+	var Unescapes = {
+	  92: "\\",
+	  34: '"',
+	  47: "/",
+	  98: "\b",
+	  116: "\t",
+	  110: "\n",
+	  102: "\f",
+	  114: "\r"
+	};
+
+	// Internal: Stores the parser state.
+	var Index, Source;
+
+	// Internal: Resets the parser state and throws a `SyntaxError`.
+	var abort = function () {
+	  Index = Source = null;
+	  throw SyntaxError();
+	};
+
+	// Internal: Returns the next token, or `"$"` if the parser has reached
+	// the end of the source string. A token may be a string, number, `null`
+	// literal, or Boolean literal.
+	var lex = function () {
+	  var source = Source, length = source.length, value, begin, position, isSigned, charCode;
+	  while (Index < length) {
+	    charCode = source.charCodeAt(Index);
+	    switch (charCode) {
+	      case 9: case 10: case 13: case 32:
+		// Skip whitespace tokens, including tabs, carriage returns, line
+		// feeds, and space characters.
+		Index++;
+		break;
+	      case 123: case 125: case 91: case 93: case 58: case 44:
+		// Parse a punctuator token (`{`, `}`, `[`, `]`, `:`, or `,`) at
+		// the current position.
+		value = charIndexBuggy ? source.charAt(Index) : source[Index];
+		Index++;
+		return value;
+	      case 34:
+		// `"` delimits a JSON string; advance to the next character and
+		// begin parsing the string. String tokens are prefixed with the
+		// sentinel `@` character to distinguish them from punctuators and
+		// end-of-string tokens.
+		for (value = "@", Index++; Index < length;) {
+		  charCode = source.charCodeAt(Index);
+		  if (charCode < 32) {
+		    // Unescaped ASCII control characters (those with a code unit
+		    // less than the space character) are not permitted.
+		    abort();
+		  } else if (charCode == 92) {
+		    // A reverse solidus (`\`) marks the beginning of an escaped
+		    // control character (including `"`, `\`, and `/`) or Unicode
+		    // escape sequence.
+		    charCode = source.charCodeAt(++Index);
+		    switch (charCode) {
+		      case 92: case 34: case 47: case 98: case 116: case 110: case 102: case 114:
+			// Revive escaped control characters.
+			value += Unescapes[charCode];
+			Index++;
+			break;
+		      case 117:
+			// `\u` marks the beginning of a Unicode escape sequence.
+			// Advance to the first character and validate the
+			// four-digit code point.
+			begin = ++Index;
+			for (position = Index + 4; Index < position; Index++) {
+			  charCode = source.charCodeAt(Index);
+			  // A valid sequence comprises four hexdigits (case-
+			  // insensitive) that form a single hexadecimal value.
+			  if (!(charCode >= 48 && charCode <= 57 || charCode >= 97 && charCode <= 102 || charCode >= 65 && charCode <= 70)) {
+			    // Invalid Unicode escape sequence.
+			    abort();
+			  }
+			}
+			// Revive the escaped character.
+			value += fromCharCode("0x" + source.slice(begin, Index));
+			break;
+		      default:
+			// Invalid escape sequence.
+			abort();
+		    }
+		  } else {
+		    if (charCode == 34) {
+		      // An unescaped double-quote character marks the end of the
+		      // string.
+		      break;
+		    }
+		    charCode = source.charCodeAt(Index);
+		    begin = Index;
+		    // Optimize for the common case where a string is valid.
+		    while (charCode >= 32 && charCode != 92 && charCode != 34) {
+		      charCode = source.charCodeAt(++Index);
+		    }
+		    // Append the string as-is.
+		    value += source.slice(begin, Index);
+		  }
+		}
+		if (source.charCodeAt(Index) == 34) {
+		  // Advance to the next character and return the revived string.
+		  Index++;
+		  return value;
+		}
+		// Unterminated string.
+		abort();
+	      default:
+		// Parse numbers and literals.
+		begin = Index;
+		// Advance past the negative sign, if one is specified.
+		if (charCode == 45) {
+		  isSigned = true;
+		  charCode = source.charCodeAt(++Index);
+		}
+		// Parse an integer or floating-point value.
+		if (charCode >= 48 && charCode <= 57) {
+		  // Leading zeroes are interpreted as octal literals.
+		  if (charCode == 48 && ((charCode = source.charCodeAt(Index + 1)), charCode >= 48 && charCode <= 57)) {
+		    // Illegal octal literal.
+		    abort();
+		  }
+		  isSigned = false;
+		  // Parse the integer component.
+		  for (; Index < length && ((charCode = source.charCodeAt(Index)), charCode >= 48 && charCode <= 57); Index++);
+		  // Floats cannot contain a leading decimal point; however, this
+		  // case is already accounted for by the parser.
+		  if (source.charCodeAt(Index) == 46) {
+		    position = ++Index;
+		    // Parse the decimal component.
+		    for (; position < length && ((charCode = source.charCodeAt(position)), charCode >= 48 && charCode <= 57); position++);
+		    if (position == Index) {
+		      // Illegal trailing decimal.
+		      abort();
+		    }
+		    Index = position;
+		  }
+		  // Parse exponents. The `e` denoting the exponent is
+		  // case-insensitive.
+		  charCode = source.charCodeAt(Index);
+		  if (charCode == 101 || charCode == 69) {
+		    charCode = source.charCodeAt(++Index);
+		    // Skip past the sign following the exponent, if one is
+		    // specified.
+		    if (charCode == 43 || charCode == 45) {
+		      Index++;
+		    }
+		    // Parse the exponential component.
+		    for (position = Index; position < length && ((charCode = source.charCodeAt(position)), charCode >= 48 && charCode <= 57); position++);
+		    if (position == Index) {
+		      // Illegal empty exponent.
+		      abort();
+		    }
+		    Index = position;
+		  }
+		  // Coerce the parsed value to a JavaScript number.
+		  return +source.slice(begin, Index);
+		}
+		// A negative sign may only precede numbers.
+		if (isSigned) {
+		  abort();
+		}
+		// `true`, `false`, and `null` literals.
+		if (source.slice(Index, Index + 4) == "true") {
+		  Index += 4;
+		  return true;
+		} else if (source.slice(Index, Index + 5) == "false") {
+		  Index += 5;
+		  return false;
+		} else if (source.slice(Index, Index + 4) == "null") {
+		  Index += 4;
+		  return null;
+		}
+		// Unrecognized token.
+		abort();
+	    }
+	  }
+	  // Return the sentinel `$` character if the parser has reached the end
+	  // of the source string.
+	  return "$";
+	};
+
+	// Internal: Parses a JSON `value` token.
+	var get = function (value) {
+	  var results, hasMembers;
+	  if (value == "$") {
+	    // Unexpected end of input.
+	    abort();
+	  }
+	  if (typeof value == "string") {
+	    if ((charIndexBuggy ? value.charAt(0) : value[0]) == "@") {
+	      // Remove the sentinel `@` character.
+	      return value.slice(1);
+	    }
+	    // Parse object and array literals.
+	    if (value == "[") {
+	      // Parses a JSON array, returning a new JavaScript array.
+	      results = [];
+	      for (;; hasMembers || (hasMembers = true)) {
+		value = lex();
+		// A closing square bracket marks the end of the array literal.
+		if (value == "]") {
+		  break;
+		}
+		// If the array literal contains elements, the current token
+		// should be a comma separating the previous element from the
+		// next.
+		if (hasMembers) {
+		  if (value == ",") {
+		    value = lex();
+		    if (value == "]") {
+		      // Unexpected trailing `,` in array literal.
+		      abort();
+		    }
+		  } else {
+		    // A `,` must separate each array element.
+		    abort();
+		  }
+		}
+		// Elisions and leading commas are not permitted.
+		if (value == ",") {
+		  abort();
+		}
+		results.push(get(value));
+	      }
+	      return results;
+	    } else if (value == "{") {
+	      // Parses a JSON object, returning a new JavaScript object.
+	      results = {};
+	      for (;; hasMembers || (hasMembers = true)) {
+		value = lex();
+		// A closing curly brace marks the end of the object literal.
+		if (value == "}") {
+		  break;
+		}
+		// If the object literal contains members, the current token
+		// should be a comma separator.
+		if (hasMembers) {
+		  if (value == ",") {
+		    value = lex();
+		    if (value == "}") {
+		      // Unexpected trailing `,` in object literal.
+		      abort();
+		    }
+		  } else {
+		    // A `,` must separate each object member.
+		    abort();
+		  }
+		}
+		// Leading commas are not permitted, object property names must be
+		// double-quoted strings, and a `:` must separate each property
+		// name and value.
+		if (value == "," || typeof value != "string" || (charIndexBuggy ? value.charAt(0) : value[0]) != "@" || lex() != ":") {
+		  abort();
+		}
+		results[value.slice(1)] = get(lex());
+	      }
+	      return results;
+	    }
+	    // Unexpected token encountered.
+	    abort();
+	  }
+	  return value;
+	};
+
+	// Internal: Updates a traversed object member.
+	var update = function (source, property, callback) {
+	  var element = walk(source, property, callback);
+	  if (element === undef) {
+	    delete source[property];
+	  } else {
+	    source[property] = element;
+	  }
+	};
+
+	// Internal: Recursively traverses a parsed JSON object, invoking the
+	// `callback` function for each value. This is an implementation of the
+	// `Walk(holder, name)` operation defined in ES 5.1 section 15.12.2.
+	var walk = function (source, property, callback) {
+	  var value = source[property], length;
+	  if (typeof value == "object" && value) {
+	    // `forEach` can't be used to traverse an array in Opera <= 8.54
+	    // because its `Object#hasOwnProperty` implementation returns `false`
+	    // for array indices (e.g., `![1, 2, 3].hasOwnProperty("0")`).
+	    if (getClass.call(value) == arrayClass) {
+	      for (length = value.length; length--;) {
+		update(value, length, callback);
+	      }
+	    } else {
+	      forEach(value, function (property) {
+		update(value, property, callback);
+	      });
+	    }
+	  }
+	  return callback.call(source, property, value);
+	};
+
+	// Public: `JSON.parse`. See ES 5.1 section 15.12.2.
+	exports.parse = function (source, callback) {
+	  var result, value;
+	  Index = 0;
+	  Source = "" + source;
+	  result = get(lex());
+	  // If a JSON string contains multiple tokens, it is invalid.
+	  if (lex() != "$") {
+	    abort();
+	  }
+	  // Reset the parser state.
+	  Index = Source = null;
+	  return callback && getClass.call(callback) == functionClass ? walk((value = {}, value[""] = result, value), "", callback) : result;
+	};
+>>>>>>> Add test with mocha and chai
       }
     }
 
@@ -11817,13 +13819,19 @@ module.exports = Array.isArray || function (arr) {
   } else {
     // Export for web browsers and JavaScript engines.
     var nativeJSON = root.JSON,
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         previousJSON = root["JSON3"],
         isRestored = false;
+=======
+	previousJSON = root["JSON3"],
+	isRestored = false;
+>>>>>>> Add test with mocha and chai
 
     var JSON3 = runInContext(root, (root["JSON3"] = {
       // Public: Restores the original value of the global `JSON` object and
       // returns a reference to the `JSON3` object.
       "noConflict": function () {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         if (!isRestored) {
           isRestored = true;
           root.JSON = nativeJSON;
@@ -11831,6 +13839,15 @@ module.exports = Array.isArray || function (arr) {
           nativeJSON = previousJSON = null;
         }
         return JSON3;
+=======
+	if (!isRestored) {
+	  isRestored = true;
+	  root.JSON = nativeJSON;
+	  root["JSON3"] = previousJSON;
+	  nativeJSON = previousJSON = null;
+	}
+	return JSON3;
+>>>>>>> Add test with mocha and chai
       }
     }));
 
@@ -12943,7 +14960,11 @@ function keysIn(object) {
   }
   for (var key in object) {
     if (!(skipIndexes && isIndex(key, length)) &&
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
+=======
+	!(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
+>>>>>>> Add test with mocha and chai
       result.push(key);
     }
   }
@@ -12962,6 +14983,7 @@ module.exports = mkdirP.mkdirp = mkdirP.mkdirP = mkdirP;
 
 function mkdirP (p, opts, f, made) {
     if (typeof opts === 'function') {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         f = opts;
         opts = {};
     }
@@ -13005,11 +15027,57 @@ function mkdirP (p, opts, f, made) {
                 });
                 break;
         }
+=======
+	f = opts;
+	opts = {};
+    }
+    else if (!opts || typeof opts !== 'object') {
+	opts = { mode: opts };
+    }
+
+    var mode = opts.mode;
+    var xfs = opts.fs || fs;
+
+    if (mode === undefined) {
+	mode = _0777 & (~process.umask());
+    }
+    if (!made) made = null;
+
+    var cb = f || function () {};
+    p = path.resolve(p);
+
+    xfs.mkdir(p, mode, function (er) {
+	if (!er) {
+	    made = made || p;
+	    return cb(null, made);
+	}
+	switch (er.code) {
+	    case 'ENOENT':
+		mkdirP(path.dirname(p), opts, function (er, made) {
+		    if (er) cb(er, made);
+		    else mkdirP(p, opts, cb, made);
+		});
+		break;
+
+	    // In the case of any other error, just see if there's a dir
+	    // there already.  If so, then hooray!  If not, then something
+	    // is borked.
+	    default:
+		xfs.stat(p, function (er2, stat) {
+		    // if the stat fails, then that's super weird.
+		    // let the original error be the failure reason.
+		    if (er2 || !stat.isDirectory()) cb(er, made)
+		    else cb(null, made);
+		});
+		break;
+	}
+>>>>>>> Add test with mocha and chai
     });
 }
 
 mkdirP.sync = function sync (p, opts, made) {
     if (!opts || typeof opts !== 'object') {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         opts = { mode: opts };
     }
     
@@ -13018,12 +15086,23 @@ mkdirP.sync = function sync (p, opts, made) {
     
     if (mode === undefined) {
         mode = _0777 & (~process.umask());
+=======
+	opts = { mode: opts };
+    }
+
+    var mode = opts.mode;
+    var xfs = opts.fs || fs;
+
+    if (mode === undefined) {
+	mode = _0777 & (~process.umask());
+>>>>>>> Add test with mocha and chai
     }
     if (!made) made = null;
 
     p = path.resolve(p);
 
     try {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         xfs.mkdirSync(p, mode);
         made = made || p;
     }
@@ -13048,6 +15127,32 @@ mkdirP.sync = function sync (p, opts, made) {
                 if (!stat.isDirectory()) throw err0;
                 break;
         }
+=======
+	xfs.mkdirSync(p, mode);
+	made = made || p;
+    }
+    catch (err0) {
+	switch (err0.code) {
+	    case 'ENOENT' :
+		made = sync(path.dirname(p), opts, made);
+		sync(p, opts, made);
+		break;
+
+	    // In the case of any other error, just see if there's a dir
+	    // there already.  If so, then hooray!  If not, then something
+	    // is borked.
+	    default:
+		var stat;
+		try {
+		    stat = xfs.statSync(p);
+		}
+		catch (err1) {
+		    throw err0;
+		}
+		if (!stat.isDirectory()) throw err0;
+		break;
+	}
+>>>>>>> Add test with mocha and chai
     }
 
     return made;
@@ -13059,7 +15164,11 @@ exports.endianness = function () { return 'LE' };
 
 exports.hostname = function () {
     if (typeof location !== 'undefined') {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return location.hostname
+=======
+	return location.hostname
+>>>>>>> Add test with mocha and chai
     }
     else return '';
 };
@@ -13082,7 +15191,11 @@ exports.type = function () { return 'Browser' };
 
 exports.release = function () {
     if (typeof navigator !== 'undefined') {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return navigator.appVersion;
+=======
+	return navigator.appVersion;
+>>>>>>> Add test with mocha and chai
     }
     return '';
 };
@@ -13168,6 +15281,7 @@ function defaultClearTimeout () {
 }
 (function () {
     try {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         if (typeof setTimeout === 'function') {
             cachedSetTimeout = setTimeout;
         } else {
@@ -13184,10 +15298,29 @@ function defaultClearTimeout () {
         }
     } catch (e) {
         cachedClearTimeout = defaultClearTimeout;
+=======
+	if (typeof setTimeout === 'function') {
+	    cachedSetTimeout = setTimeout;
+	} else {
+	    cachedSetTimeout = defaultSetTimout;
+	}
+    } catch (e) {
+	cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+	if (typeof clearTimeout === 'function') {
+	    cachedClearTimeout = clearTimeout;
+	} else {
+	    cachedClearTimeout = defaultClearTimeout;
+	}
+    } catch (e) {
+	cachedClearTimeout = defaultClearTimeout;
+>>>>>>> Add test with mocha and chai
     }
 } ())
 function runTimeout(fun) {
     if (cachedSetTimeout === setTimeout) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         //normal enviroments in sane situations
         return setTimeout(fun, 0);
     }
@@ -13207,12 +15340,34 @@ function runTimeout(fun) {
             // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
             return cachedSetTimeout.call(this, fun, 0);
         }
+=======
+	//normal enviroments in sane situations
+	return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+	cachedSetTimeout = setTimeout;
+	return setTimeout(fun, 0);
+    }
+    try {
+	// when when somebody has screwed with setTimeout but no I.E. maddness
+	return cachedSetTimeout(fun, 0);
+    } catch(e){
+	try {
+	    // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+	    return cachedSetTimeout.call(null, fun, 0);
+	} catch(e){
+	    // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+	    return cachedSetTimeout.call(this, fun, 0);
+	}
+>>>>>>> Add test with mocha and chai
     }
 
 
 }
 function runClearTimeout(marker) {
     if (cachedClearTimeout === clearTimeout) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         //normal enviroments in sane situations
         return clearTimeout(marker);
     }
@@ -13233,6 +15388,28 @@ function runClearTimeout(marker) {
             // Some versions of I.E. have different rules for clearTimeout vs setTimeout
             return cachedClearTimeout.call(this, marker);
         }
+=======
+	//normal enviroments in sane situations
+	return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+	cachedClearTimeout = clearTimeout;
+	return clearTimeout(marker);
+    }
+    try {
+	// when when somebody has screwed with setTimeout but no I.E. maddness
+	return cachedClearTimeout(marker);
+    } catch (e){
+	try {
+	    // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+	    return cachedClearTimeout.call(null, marker);
+	} catch (e){
+	    // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+	    // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+	    return cachedClearTimeout.call(this, marker);
+	}
+>>>>>>> Add test with mocha and chai
     }
 
 
@@ -13245,6 +15422,7 @@ var queueIndex = -1;
 
 function cleanUpNextTick() {
     if (!draining || !currentQueue) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return;
     }
     draining = false;
@@ -13255,18 +15433,35 @@ function cleanUpNextTick() {
     }
     if (queue.length) {
         drainQueue();
+=======
+	return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+	queue = currentQueue.concat(queue);
+    } else {
+	queueIndex = -1;
+    }
+    if (queue.length) {
+	drainQueue();
+>>>>>>> Add test with mocha and chai
     }
 }
 
 function drainQueue() {
     if (draining) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return;
+=======
+	return;
+>>>>>>> Add test with mocha and chai
     }
     var timeout = runTimeout(cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
     while(len) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         currentQueue = queue;
         queue = [];
         while (++queueIndex < len) {
@@ -13276,6 +15471,17 @@ function drainQueue() {
         }
         queueIndex = -1;
         len = queue.length;
+=======
+	currentQueue = queue;
+	queue = [];
+	while (++queueIndex < len) {
+	    if (currentQueue) {
+		currentQueue[queueIndex].run();
+	    }
+	}
+	queueIndex = -1;
+	len = queue.length;
+>>>>>>> Add test with mocha and chai
     }
     currentQueue = null;
     draining = false;
@@ -13285,6 +15491,7 @@ function drainQueue() {
 process.nextTick = function (fun) {
     var args = new Array(arguments.length - 1);
     if (arguments.length > 1) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         for (var i = 1; i < arguments.length; i++) {
             args[i - 1] = arguments[i];
         }
@@ -13292,6 +15499,15 @@ process.nextTick = function (fun) {
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
         runTimeout(drainQueue);
+=======
+	for (var i = 1; i < arguments.length; i++) {
+	    args[i - 1] = arguments[i];
+	}
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+	runTimeout(drainQueue);
+>>>>>>> Add test with mocha and chai
     }
 };
 
@@ -13642,8 +15858,13 @@ function readableAddChunk(stream, state, chunk, encoding, addToFront) {
     } else {
       var skipAdd;
       if (state.decoder && !addToFront && !encoding) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         chunk = state.decoder.write(chunk);
         skipAdd = !state.objectMode && chunk.length === 0;
+=======
+	chunk = state.decoder.write(chunk);
+	skipAdd = !state.objectMode && chunk.length === 0;
+>>>>>>> Add test with mocha and chai
       }
 
       if (!addToFront) state.reading = false;
@@ -13651,6 +15872,7 @@ function readableAddChunk(stream, state, chunk, encoding, addToFront) {
       // Don't add to the buffer if we've decoded to an empty string chunk and
       // we're not in object mode
       if (!skipAdd) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         // if we want the data now, just emit it.
         if (state.flowing && state.length === 0 && !state.sync) {
           stream.emit('data', chunk);
@@ -13662,6 +15884,19 @@ function readableAddChunk(stream, state, chunk, encoding, addToFront) {
 
           if (state.needReadable) emitReadable(stream);
         }
+=======
+	// if we want the data now, just emit it.
+	if (state.flowing && state.length === 0 && !state.sync) {
+	  stream.emit('data', chunk);
+	  stream.read(0);
+	} else {
+	  // update the buffer info.
+	  state.length += state.objectMode ? 1 : chunk.length;
+	  if (addToFront) state.buffer.unshift(chunk);else state.buffer.push(chunk);
+
+	  if (state.needReadable) emitReadable(stream);
+	}
+>>>>>>> Add test with mocha and chai
       }
 
       maybeReadMore(stream, state);
@@ -13989,9 +16224,15 @@ Readable.prototype.pipe = function (dest, pipeOpts) {
       // also returned false.
       // => Check whether `dest` is still a piping destination.
       if ((state.pipesCount === 1 && state.pipes === dest || state.pipesCount > 1 && indexOf(state.pipes, dest) !== -1) && !cleanedUp) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         debug('false write response, pause', src._readableState.awaitDrain);
         src._readableState.awaitDrain++;
         increasedAwaitDrain = true;
+=======
+	debug('false write response, pause', src._readableState.awaitDrain);
+	src._readableState.awaitDrain++;
+	increasedAwaitDrain = true;
+>>>>>>> Add test with mocha and chai
       }
       src.pause();
     }
@@ -14114,9 +16355,15 @@ Readable.prototype.on = function (ev, fn) {
       state.readableListening = state.needReadable = true;
       state.emittedReadable = false;
       if (!state.reading) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         processNextTick(nReadingNextTick, this);
       } else if (state.length) {
         emitReadable(this, state);
+=======
+	processNextTick(nReadingNextTick, this);
+      } else if (state.length) {
+	emitReadable(this, state);
+>>>>>>> Add test with mocha and chai
       }
     }
   }
@@ -14215,9 +16462,15 @@ Readable.prototype.wrap = function (stream) {
   for (var i in stream) {
     if (this[i] === undefined && typeof stream[i] === 'function') {
       this[i] = function (method) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return function () {
           return stream[method].apply(stream, arguments);
         };
+=======
+	return function () {
+	  return stream[method].apply(stream, arguments);
+	};
+>>>>>>> Add test with mocha and chai
       }(i);
     }
   }
@@ -14299,11 +16552,19 @@ function copyFromBufferString(n, list) {
     n -= nb;
     if (n === 0) {
       if (nb === str.length) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         ++c;
         if (p.next) list.head = p.next;else list.head = list.tail = null;
       } else {
         list.head = p;
         p.data = str.slice(nb);
+=======
+	++c;
+	if (p.next) list.head = p.next;else list.head = list.tail = null;
+      } else {
+	list.head = p;
+	p.data = str.slice(nb);
+>>>>>>> Add test with mocha and chai
       }
       break;
     }
@@ -14329,11 +16590,19 @@ function copyFromBuffer(n, list) {
     n -= nb;
     if (n === 0) {
       if (nb === buf.length) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         ++c;
         if (p.next) list.head = p.next;else list.head = list.tail = null;
       } else {
         list.head = p;
         p.data = buf.slice(nb);
+=======
+	++c;
+	if (p.next) list.head = p.next;else list.head = list.tail = null;
+      } else {
+	list.head = p;
+	p.data = buf.slice(nb);
+>>>>>>> Add test with mocha and chai
       }
       break;
     }
@@ -14726,7 +16995,11 @@ WritableState.prototype.getBuffer = function getBuffer() {
   try {
     Object.defineProperty(WritableState.prototype, 'buffer', {
       get: internalUtil.deprecate(function () {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return this.getBuffer();
+=======
+	return this.getBuffer();
+>>>>>>> Add test with mocha and chai
       }, '_writableState.buffer is deprecated. Use _writableState.getBuffer ' + 'instead.')
     });
   } catch (_) {}
@@ -15007,7 +17280,11 @@ function clearBuffer(stream, state) {
       // also, that means that the chunk and cb are currently
       // being processed, so move the buffer counter past them.
       if (state.writing) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         break;
+=======
+	break;
+>>>>>>> Add test with mocha and chai
       }
     }
 
@@ -15246,7 +17523,11 @@ Stream.prototype.pipe = function(dest, options) {
   function ondata(chunk) {
     if (dest.writable) {
       if (false === dest.write(chunk) && source.pause) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         source.pause();
+=======
+	source.pause();
+>>>>>>> Add test with mocha and chai
       }
     }
   }
@@ -15346,11 +17627,16 @@ function _normalizeEncoding(enc) {
     switch (enc) {
       case 'utf8':
       case 'utf-8':
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return 'utf8';
+=======
+	return 'utf8';
+>>>>>>> Add test with mocha and chai
       case 'ucs2':
       case 'ucs-2':
       case 'utf16le':
       case 'utf-16le':
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return 'utf16le';
       case 'latin1':
       case 'binary':
@@ -15363,6 +17649,20 @@ function _normalizeEncoding(enc) {
         if (retried) return; // undefined
         enc = ('' + enc).toLowerCase();
         retried = true;
+=======
+	return 'utf16le';
+      case 'latin1':
+      case 'binary':
+	return 'latin1';
+      case 'base64':
+      case 'ascii':
+      case 'hex':
+	return enc;
+      default:
+	if (retried) return; // undefined
+	enc = ('' + enc).toLowerCase();
+	retried = true;
+>>>>>>> Add test with mocha and chai
     }
   }
 };
@@ -15493,8 +17793,13 @@ function utf8CheckExtraBytes(self, buf, p) {
     }
     if (self.lastNeed > 2 && buf.length > 2) {
       if ((buf[2] & 0xC0) !== 0x80) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         self.lastNeed = 2;
         return '\ufffd'.repeat(p + 2);
+=======
+	self.lastNeed = 2;
+	return '\ufffd'.repeat(p + 2);
+>>>>>>> Add test with mocha and chai
       }
     }
   }
@@ -15543,11 +17848,19 @@ function utf16Text(buf, i) {
     if (r) {
       var c = r.charCodeAt(r.length - 1);
       if (c >= 0xD800 && c <= 0xDBFF) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         this.lastNeed = 2;
         this.lastTotal = 4;
         this.lastChar[0] = buf[buf.length - 2];
         this.lastChar[1] = buf[buf.length - 1];
         return r.slice(0, -1);
+=======
+	this.lastNeed = 2;
+	this.lastTotal = 4;
+	this.lastChar[0] = buf[buf.length - 2];
+	this.lastChar[1] = buf[buf.length - 1];
+	return r.slice(0, -1);
+>>>>>>> Add test with mocha and chai
       }
     }
     return r;
@@ -15633,11 +17946,19 @@ function deprecate (fn, msg) {
   function deprecated() {
     if (!warned) {
       if (config('throwDeprecation')) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         throw new Error(msg);
       } else if (config('traceDeprecation')) {
         console.trace(msg);
       } else {
         console.warn(msg);
+=======
+	throw new Error(msg);
+      } else if (config('traceDeprecation')) {
+	console.trace(msg);
+      } else {
+	console.warn(msg);
+>>>>>>> Add test with mocha and chai
       }
       warned = true;
     }
@@ -15720,6 +18041,7 @@ exports.format = function(f) {
       case '%s': return String(args[i++]);
       case '%d': return Number(args[i++]);
       case '%j':
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         try {
           return JSON.stringify(args[i++]);
         } catch (_) {
@@ -15727,6 +18049,15 @@ exports.format = function(f) {
         }
       default:
         return x;
+=======
+	try {
+	  return JSON.stringify(args[i++]);
+	} catch (_) {
+	  return '[Circular]';
+	}
+      default:
+	return x;
+>>>>>>> Add test with mocha and chai
     }
   });
   for (var x = args[i]; i < len; x = args[++i]) {
@@ -15759,11 +18090,19 @@ exports.deprecate = function(fn, msg) {
   function deprecated() {
     if (!warned) {
       if (process.throwDeprecation) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         throw new Error(msg);
       } else if (process.traceDeprecation) {
         console.trace(msg);
       } else {
         console.error(msg);
+=======
+	throw new Error(msg);
+      } else if (process.traceDeprecation) {
+	console.trace(msg);
+      } else {
+	console.error(msg);
+>>>>>>> Add test with mocha and chai
       }
       warned = true;
     }
@@ -15784,8 +18123,13 @@ exports.debuglog = function(set) {
     if (new RegExp('\\b' + set + '\\b', 'i').test(debugEnviron)) {
       var pid = process.pid;
       debugs[set] = function() {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         var msg = exports.format.apply(exports, arguments);
         console.error('%s %d: %s', set, pid, msg);
+=======
+	var msg = exports.format.apply(exports, arguments);
+	console.error('%s %d: %s', set, pid, msg);
+>>>>>>> Add test with mocha and chai
       };
     } else {
       debugs[set] = function() {};
@@ -15866,7 +18210,11 @@ function stylizeWithColor(str, styleType) {
 
   if (style) {
     return '\u001b[' + inspect.colors[style][0] + 'm' + str +
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
            '\u001b[' + inspect.colors[style][1] + 'm';
+=======
+	   '\u001b[' + inspect.colors[style][1] + 'm';
+>>>>>>> Add test with mocha and chai
   } else {
     return str;
   }
@@ -16007,8 +18355,13 @@ function formatPrimitive(ctx, value) {
     return ctx.stylize('undefined', 'undefined');
   if (isString(value)) {
     var simple = '\'' + JSON.stringify(value).replace(/^"|"$/g, '')
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
                                              .replace(/'/g, "\\'")
                                              .replace(/\\"/g, '"') + '\'';
+=======
+					     .replace(/'/g, "\\'")
+					     .replace(/\\"/g, '"') + '\'';
+>>>>>>> Add test with mocha and chai
     return ctx.stylize(simple, 'string');
   }
   if (isNumber(value))
@@ -16031,7 +18384,11 @@ function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
   for (var i = 0, l = value.length; i < l; ++i) {
     if (hasOwnProperty(value, String(i))) {
       output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           String(i), true));
+=======
+	  String(i), true));
+>>>>>>> Add test with mocha and chai
     } else {
       output.push('');
     }
@@ -16039,7 +18396,11 @@ function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
   keys.forEach(function(key) {
     if (!key.match(/^\d+$/)) {
       output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           key, true));
+=======
+	  key, true));
+>>>>>>> Add test with mocha and chai
     }
   });
   return output;
@@ -16066,6 +18427,7 @@ function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
   if (!str) {
     if (ctx.seen.indexOf(desc.value) < 0) {
       if (isNull(recurseTimes)) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         str = formatValue(ctx, desc.value, null);
       } else {
         str = formatValue(ctx, desc.value, recurseTimes - 1);
@@ -16080,6 +18442,22 @@ function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
             return '   ' + line;
           }).join('\n');
         }
+=======
+	str = formatValue(ctx, desc.value, null);
+      } else {
+	str = formatValue(ctx, desc.value, recurseTimes - 1);
+      }
+      if (str.indexOf('\n') > -1) {
+	if (array) {
+	  str = str.split('\n').map(function(line) {
+	    return '  ' + line;
+	  }).join('\n').substr(2);
+	} else {
+	  str = '\n' + str.split('\n').map(function(line) {
+	    return '   ' + line;
+	  }).join('\n');
+	}
+>>>>>>> Add test with mocha and chai
       }
     } else {
       str = ctx.stylize('[Circular]', 'special');
@@ -16095,8 +18473,13 @@ function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
       name = ctx.stylize(name, 'name');
     } else {
       name = name.replace(/'/g, "\\'")
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
                  .replace(/\\"/g, '"')
                  .replace(/(^"|"$)/g, "'");
+=======
+		 .replace(/\\"/g, '"')
+		 .replace(/(^"|"$)/g, "'");
+>>>>>>> Add test with mocha and chai
       name = ctx.stylize(name, 'string');
     }
   }
@@ -16115,11 +18498,19 @@ function reduceToSingleString(output, base, braces) {
 
   if (length > 60) {
     return braces[0] +
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
            (base === '' ? '' : base + '\n ') +
            ' ' +
            output.join(',\n  ') +
            ' ' +
            braces[1];
+=======
+	   (base === '' ? '' : base + '\n ') +
+	   ' ' +
+	   output.join(',\n  ') +
+	   ' ' +
+	   braces[1];
+>>>>>>> Add test with mocha and chai
   }
 
   return braces[0] + base + ' ' + output.join(', ') + ' ' + braces[1];
@@ -16196,11 +18587,19 @@ exports.isFunction = isFunction;
 
 function isPrimitive(arg) {
   return arg === null ||
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
          typeof arg === 'boolean' ||
          typeof arg === 'number' ||
          typeof arg === 'string' ||
          typeof arg === 'symbol' ||  // ES6 symbol
          typeof arg === 'undefined';
+=======
+	 typeof arg === 'boolean' ||
+	 typeof arg === 'number' ||
+	 typeof arg === 'string' ||
+	 typeof arg === 'symbol' ||  // ES6 symbol
+	 typeof arg === 'undefined';
+>>>>>>> Add test with mocha and chai
 }
 exports.isPrimitive = isPrimitive;
 
@@ -16217,14 +18616,23 @@ function pad(n) {
 
 
 var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
               'Oct', 'Nov', 'Dec'];
+=======
+	      'Oct', 'Nov', 'Dec'];
+>>>>>>> Add test with mocha and chai
 
 // 26 Feb 16:19:34
 function timestamp() {
   var d = new Date();
   var time = [pad(d.getHours()),
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
               pad(d.getMinutes()),
               pad(d.getSeconds())].join(':');
+=======
+	      pad(d.getMinutes()),
+	      pad(d.getSeconds())].join(':');
+>>>>>>> Add test with mocha and chai
   return [d.getDate(), months[d.getMonth()], time].join(' ');
 }
 

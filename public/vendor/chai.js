@@ -202,11 +202,19 @@ module.exports = function (_chai, util) {
 
     if (!ok) {
       var msg = util.getMessage(this, arguments)
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         , actual = util.getActual(this, arguments);
       throw new AssertionError(msg, {
           actual: actual
         , expected: expected
         , showDiff: showDiff
+=======
+	, actual = util.getActual(this, arguments);
+      throw new AssertionError(msg, {
+	  actual: actual
+	, expected: expected
+	, showDiff: showDiff
+>>>>>>> Add test with mocha and chai
       }, (config.includeStack) ? this.assert : flag(this, 'ssfi'));
     }
   };
@@ -221,10 +229,17 @@ module.exports = function (_chai, util) {
 
   Object.defineProperty(Assertion.prototype, '_obj',
     { get: function () {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return flag(this, 'object');
       }
     , set: function (val) {
         flag(this, 'object', val);
+=======
+	return flag(this, 'object');
+      }
+    , set: function (val) {
+	flag(this, 'object', val);
+>>>>>>> Add test with mocha and chai
       }
   });
 };
@@ -456,7 +471,11 @@ module.exports = function (chai, _) {
       , article = ~[ 'a', 'e', 'i', 'o', 'u' ].indexOf(type.charAt(0)) ? 'an ' : 'a ';
 
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         type === _.type(obj)
+=======
+	type === _.type(obj)
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to be ' + article + type
       , 'expected #{this} not to be ' + article + type
     );
@@ -500,6 +519,7 @@ module.exports = function (chai, _) {
 
     if (_.type(obj) === 'array' && _.type(val) === 'object') {
       for (var i in obj) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         if (_.eql(obj[i], val)) {
           expected = true;
           break;
@@ -509,6 +529,17 @@ module.exports = function (chai, _) {
       if (!flag(this, 'negate')) {
         for (var k in val) new Assertion(obj).property(k, val[k]);
         return;
+=======
+	if (_.eql(obj[i], val)) {
+	  expected = true;
+	  break;
+	}
+      }
+    } else if (_.type(val) === 'object') {
+      if (!flag(this, 'negate')) {
+	for (var k in val) new Assertion(obj).property(k, val[k]);
+	return;
+>>>>>>> Add test with mocha and chai
       }
       var subset = {};
       for (var k in val) subset[k] = obj[k];
@@ -517,7 +548,11 @@ module.exports = function (chai, _) {
       expected = (obj != undefined) && ~obj.indexOf(val);
     }
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         expected
+=======
+	expected
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to include ' + _.inspect(val)
       , 'expected #{this} to not include ' + _.inspect(val));
   }
@@ -545,7 +580,11 @@ module.exports = function (chai, _) {
 
   Assertion.addProperty('ok', function () {
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         flag(this, 'object')
+=======
+	flag(this, 'object')
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to be truthy'
       , 'expected #{this} to be falsy');
   });
@@ -565,7 +604,11 @@ module.exports = function (chai, _) {
 
   Assertion.addProperty('true', function () {
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         true === flag(this, 'object')
+=======
+	true === flag(this, 'object')
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to be true'
       , 'expected #{this} to be false'
       , this.negate ? false : true
@@ -587,7 +630,11 @@ module.exports = function (chai, _) {
 
   Assertion.addProperty('false', function () {
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         false === flag(this, 'object')
+=======
+	false === flag(this, 'object')
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to be false'
       , 'expected #{this} to be true'
       , this.negate ? true : false
@@ -609,7 +656,11 @@ module.exports = function (chai, _) {
 
   Assertion.addProperty('null', function () {
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         null === flag(this, 'object')
+=======
+	null === flag(this, 'object')
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to be null'
       , 'expected #{this} not to be null'
     );
@@ -630,7 +681,11 @@ module.exports = function (chai, _) {
 
   Assertion.addProperty('undefined', function () {
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         undefined === flag(this, 'object')
+=======
+	undefined === flag(this, 'object')
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to be undefined'
       , 'expected #{this} not to be undefined'
     );
@@ -650,9 +705,15 @@ module.exports = function (chai, _) {
 
   Assertion.addProperty('NaN', function () {
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         isNaN(flag(this, 'object'))
         , 'expected #{this} to be NaN'
         , 'expected #{this} not to be NaN'
+=======
+	isNaN(flag(this, 'object'))
+	, 'expected #{this} to be NaN'
+	, 'expected #{this} not to be NaN'
+>>>>>>> Add test with mocha and chai
     );
   });
 
@@ -676,7 +737,11 @@ module.exports = function (chai, _) {
 
   Assertion.addProperty('exist', function () {
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         null != flag(this, 'object')
+=======
+	null != flag(this, 'object')
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to exist'
       , 'expected #{this} to not exist'
     );
@@ -710,7 +775,11 @@ module.exports = function (chai, _) {
     }
 
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         !expected
+=======
+	!expected
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to be empty'
       , 'expected #{this} not to be empty'
     );
@@ -735,7 +804,11 @@ module.exports = function (chai, _) {
     var obj = flag(this, 'object')
       , type = Object.prototype.toString.call(obj);
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         '[object Arguments]' === type
+=======
+	'[object Arguments]' === type
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to be arguments but got ' + type
       , 'expected #{this} to not be arguments'
     );
@@ -774,12 +847,21 @@ module.exports = function (chai, _) {
       return this.eql(val);
     } else {
       this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           val === obj
         , 'expected #{this} to equal #{exp}'
         , 'expected #{this} to not equal #{exp}'
         , val
         , this._obj
         , true
+=======
+	  val === obj
+	, 'expected #{this} to equal #{exp}'
+	, 'expected #{this} to not equal #{exp}'
+	, val
+	, this._obj
+	, true
+>>>>>>> Add test with mocha and chai
       );
     }
   }
@@ -807,7 +889,11 @@ module.exports = function (chai, _) {
   function assertEql(obj, msg) {
     if (msg) flag(this, 'message', msg);
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         _.eql(obj, flag(this, 'object'))
+=======
+	_.eql(obj, flag(this, 'object'))
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to deeply equal #{exp}'
       , 'expected #{this} to not deeply equal #{exp}'
       , obj
@@ -850,6 +936,7 @@ module.exports = function (chai, _) {
       new Assertion(obj, msg).to.have.property('length');
       var len = obj.length;
       this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           len > n
         , 'expected #{this} to have a length above #{exp} but got #{act}'
         , 'expected #{this} to not have a length above #{exp}'
@@ -861,6 +948,19 @@ module.exports = function (chai, _) {
           obj > n
         , 'expected #{this} to be above ' + n
         , 'expected #{this} to be at most ' + n
+=======
+	  len > n
+	, 'expected #{this} to have a length above #{exp} but got #{act}'
+	, 'expected #{this} to not have a length above #{exp}'
+	, n
+	, len
+      );
+    } else {
+      this.assert(
+	  obj > n
+	, 'expected #{this} to be above ' + n
+	, 'expected #{this} to be at most ' + n
+>>>>>>> Add test with mocha and chai
       );
     }
   }
@@ -899,6 +999,7 @@ module.exports = function (chai, _) {
       new Assertion(obj, msg).to.have.property('length');
       var len = obj.length;
       this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           len >= n
         , 'expected #{this} to have a length at least #{exp} but got #{act}'
         , 'expected #{this} to have a length below #{exp}'
@@ -910,6 +1011,19 @@ module.exports = function (chai, _) {
           obj >= n
         , 'expected #{this} to be at least ' + n
         , 'expected #{this} to be below ' + n
+=======
+	  len >= n
+	, 'expected #{this} to have a length at least #{exp} but got #{act}'
+	, 'expected #{this} to have a length below #{exp}'
+	, n
+	, len
+      );
+    } else {
+      this.assert(
+	  obj >= n
+	, 'expected #{this} to be at least ' + n
+	, 'expected #{this} to be below ' + n
+>>>>>>> Add test with mocha and chai
       );
     }
   }
@@ -948,6 +1062,7 @@ module.exports = function (chai, _) {
       new Assertion(obj, msg).to.have.property('length');
       var len = obj.length;
       this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           len < n
         , 'expected #{this} to have a length below #{exp} but got #{act}'
         , 'expected #{this} to not have a length below #{exp}'
@@ -959,6 +1074,19 @@ module.exports = function (chai, _) {
           obj < n
         , 'expected #{this} to be below ' + n
         , 'expected #{this} to be at least ' + n
+=======
+	  len < n
+	, 'expected #{this} to have a length below #{exp} but got #{act}'
+	, 'expected #{this} to not have a length below #{exp}'
+	, n
+	, len
+      );
+    } else {
+      this.assert(
+	  obj < n
+	, 'expected #{this} to be below ' + n
+	, 'expected #{this} to be at least ' + n
+>>>>>>> Add test with mocha and chai
       );
     }
   }
@@ -997,6 +1125,7 @@ module.exports = function (chai, _) {
       new Assertion(obj, msg).to.have.property('length');
       var len = obj.length;
       this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           len <= n
         , 'expected #{this} to have a length at most #{exp} but got #{act}'
         , 'expected #{this} to have a length above #{exp}'
@@ -1008,6 +1137,19 @@ module.exports = function (chai, _) {
           obj <= n
         , 'expected #{this} to be at most ' + n
         , 'expected #{this} to be above ' + n
+=======
+	  len <= n
+	, 'expected #{this} to have a length at most #{exp} but got #{act}'
+	, 'expected #{this} to have a length above #{exp}'
+	, n
+	, len
+      );
+    } else {
+      this.assert(
+	  obj <= n
+	, 'expected #{this} to be at most ' + n
+	, 'expected #{this} to be above ' + n
+>>>>>>> Add test with mocha and chai
       );
     }
   }
@@ -1046,6 +1188,7 @@ module.exports = function (chai, _) {
       new Assertion(obj, msg).to.have.property('length');
       var len = obj.length;
       this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           len >= start && len <= finish
         , 'expected #{this} to have a length within ' + range
         , 'expected #{this} to not have a length within ' + range
@@ -1055,6 +1198,17 @@ module.exports = function (chai, _) {
           obj >= start && obj <= finish
         , 'expected #{this} to be within ' + range
         , 'expected #{this} to not be within ' + range
+=======
+	  len >= start && len <= finish
+	, 'expected #{this} to have a length within ' + range
+	, 'expected #{this} to not have a length within ' + range
+      );
+    } else {
+      this.assert(
+	  obj >= start && obj <= finish
+	, 'expected #{this} to be within ' + range
+	, 'expected #{this} to not be within ' + range
+>>>>>>> Add test with mocha and chai
       );
     }
   });
@@ -1082,7 +1236,11 @@ module.exports = function (chai, _) {
     if (msg) flag(this, 'message', msg);
     var name = _.getName(constructor);
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         flag(this, 'object') instanceof constructor
+=======
+	flag(this, 'object') instanceof constructor
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to be an instance of ' + name
       , 'expected #{this} to not be an instance of ' + name
     );
@@ -1172,6 +1330,7 @@ module.exports = function (chai, _) {
       , obj = flag(this, 'object')
       , pathInfo = isDeep ? _.getPathInfo(name, obj) : null
       , hasProperty = isDeep
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         ? pathInfo.exists
         : _.hasProperty(name, obj)
       , value = isDeep
@@ -1188,15 +1347,41 @@ module.exports = function (chai, _) {
           hasProperty
         , 'expected #{this} to have a ' + descriptor + _.inspect(name)
         , 'expected #{this} to not have ' + descriptor + _.inspect(name));
+=======
+	? pathInfo.exists
+	: _.hasProperty(name, obj)
+      , value = isDeep
+	? pathInfo.value
+	: obj[name];
+
+    if (negate && arguments.length > 1) {
+      if (undefined === value) {
+	msg = (msg != null) ? msg + ': ' : '';
+	throw new Error(msg + _.inspect(obj) + ' has no ' + descriptor + _.inspect(name));
+      }
+    } else {
+      this.assert(
+	  hasProperty
+	, 'expected #{this} to have a ' + descriptor + _.inspect(name)
+	, 'expected #{this} to not have ' + descriptor + _.inspect(name));
+>>>>>>> Add test with mocha and chai
     }
 
     if (arguments.length > 1) {
       this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           val === value
         , 'expected #{this} to have a ' + descriptor + _.inspect(name) + ' of #{exp}, but got #{act}'
         , 'expected #{this} to not have a ' + descriptor + _.inspect(name) + ' of #{act}'
         , val
         , value
+=======
+	  val === value
+	, 'expected #{this} to have a ' + descriptor + _.inspect(name) + ' of #{exp}, but got #{act}'
+	, 'expected #{this} to not have a ' + descriptor + _.inspect(name) + ' of #{act}'
+	, val
+	, value
+>>>>>>> Add test with mocha and chai
       );
     }
 
@@ -1223,7 +1408,11 @@ module.exports = function (chai, _) {
     if (msg) flag(this, 'message', msg);
     var obj = flag(this, 'object');
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         obj.hasOwnProperty(name)
+=======
+	obj.hasOwnProperty(name)
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to have own property ' + _.inspect(name)
       , 'expected #{this} to not have own property ' + _.inspect(name)
     );
@@ -1262,6 +1451,7 @@ module.exports = function (chai, _) {
     var actualDescriptor = Object.getOwnPropertyDescriptor(Object(obj), name);
     if (actualDescriptor && descriptor) {
       this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           _.eql(descriptor, actualDescriptor)
         , 'expected the own property descriptor for ' + _.inspect(name) + ' on #{this} to match ' + _.inspect(descriptor) + ', got ' + _.inspect(actualDescriptor)
         , 'expected the own property descriptor for ' + _.inspect(name) + ' on #{this} to not match ' + _.inspect(descriptor)
@@ -1274,6 +1464,20 @@ module.exports = function (chai, _) {
           actualDescriptor
         , 'expected #{this} to have an own property descriptor for ' + _.inspect(name)
         , 'expected #{this} to not have an own property descriptor for ' + _.inspect(name)
+=======
+	  _.eql(descriptor, actualDescriptor)
+	, 'expected the own property descriptor for ' + _.inspect(name) + ' on #{this} to match ' + _.inspect(descriptor) + ', got ' + _.inspect(actualDescriptor)
+	, 'expected the own property descriptor for ' + _.inspect(name) + ' on #{this} to not match ' + _.inspect(descriptor)
+	, descriptor
+	, actualDescriptor
+	, true
+      );
+    } else {
+      this.assert(
+	  actualDescriptor
+	, 'expected #{this} to have an own property descriptor for ' + _.inspect(name)
+	, 'expected #{this} to not have an own property descriptor for ' + _.inspect(name)
+>>>>>>> Add test with mocha and chai
       );
     }
     flag(this, 'object', actualDescriptor);
@@ -1332,7 +1536,11 @@ module.exports = function (chai, _) {
     var len = obj.length;
 
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         len == n
+=======
+	len == n
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to have a length of #{exp} but got #{act}'
       , 'expected #{this} to not have a length of #{act}'
       , n
@@ -1361,7 +1569,11 @@ module.exports = function (chai, _) {
     if (msg) flag(this, 'message', msg);
     var obj = flag(this, 'object');
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         re.exec(obj)
+=======
+	re.exec(obj)
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to match ' + re
       , 'expected #{this} not to match ' + re
     );
@@ -1390,7 +1602,11 @@ module.exports = function (chai, _) {
     new Assertion(obj, msg).is.a('string');
 
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         ~obj.indexOf(str)
+=======
+	~obj.indexOf(str)
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to contain ' + _.inspect(str)
       , 'expected #{this} to not contain ' + _.inspect(str)
     );
@@ -1444,6 +1660,7 @@ module.exports = function (chai, _) {
 
     switch (_.type(keys)) {
       case "array":
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         if (arguments.length > 1) throw (new Error(mixedArgsMsg));
         break;
       case "object":
@@ -1452,6 +1669,16 @@ module.exports = function (chai, _) {
         break;
       default:
         keys = Array.prototype.slice.call(arguments);
+=======
+	if (arguments.length > 1) throw (new Error(mixedArgsMsg));
+	break;
+      case "object":
+	if (arguments.length > 1) throw (new Error(mixedArgsMsg));
+	keys = Object.keys(keys);
+	break;
+      default:
+	keys = Array.prototype.slice.call(arguments);
+>>>>>>> Add test with mocha and chai
     }
 
     if (!keys.length) throw new Error('keys required');
@@ -1469,7 +1696,11 @@ module.exports = function (chai, _) {
     // Has any
     if (any) {
       var intersection = expected.filter(function(key) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return ~actual.indexOf(key);
+=======
+	return ~actual.indexOf(key);
+>>>>>>> Add test with mocha and chai
       });
       ok = intersection.length > 0;
     }
@@ -1477,16 +1708,24 @@ module.exports = function (chai, _) {
     // Has all
     if (all) {
       ok = keys.every(function(key){
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return ~actual.indexOf(key);
       });
       if (!flag(this, 'negate') && !flag(this, 'contains')) {
         ok = ok && keys.length == actual.length;
+=======
+	return ~actual.indexOf(key);
+      });
+      if (!flag(this, 'negate') && !flag(this, 'contains')) {
+	ok = ok && keys.length == actual.length;
+>>>>>>> Add test with mocha and chai
       }
     }
 
     // Key string
     if (len > 1) {
       keys = keys.map(function(key){
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return _.inspect(key);
       });
       var last = keys.pop();
@@ -1495,6 +1734,16 @@ module.exports = function (chai, _) {
       }
       if (any) {
         str = keys.join(', ') + ', or ' + last;
+=======
+	return _.inspect(key);
+      });
+      var last = keys.pop();
+      if (all) {
+	str = keys.join(', ') + ', and ' + last;
+      }
+      if (any) {
+	str = keys.join(', ') + ', or ' + last;
+>>>>>>> Add test with mocha and chai
       }
     } else {
       str = _.inspect(keys[0]);
@@ -1508,7 +1757,11 @@ module.exports = function (chai, _) {
 
     // Assertion
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         ok
+=======
+	ok
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to ' + str
       , 'expected #{this} to not ' + str
       , expected.slice(0).sort()
@@ -1579,7 +1832,11 @@ module.exports = function (chai, _) {
     } else if (typeof constructor === 'function') {
       name = constructor.prototype.name;
       if (!name || (name === 'Error' && constructor !== Error)) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         name = constructor.name || (new constructor()).name;
+=======
+	name = constructor.name || (new constructor()).name;
+>>>>>>> Add test with mocha and chai
       }
     } else {
       constructor = null;
@@ -1590,6 +1847,7 @@ module.exports = function (chai, _) {
     } catch (err) {
       // first, check desired error
       if (desiredError) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         this.assert(
             err === desiredError
           , 'expected #{this} to throw #{exp} but #{act} was thrown'
@@ -1600,10 +1858,23 @@ module.exports = function (chai, _) {
 
         flag(this, 'object', err);
         return this;
+=======
+	this.assert(
+	    err === desiredError
+	  , 'expected #{this} to throw #{exp} but #{act} was thrown'
+	  , 'expected #{this} to not throw #{exp}'
+	  , (desiredError instanceof Error ? desiredError.toString() : desiredError)
+	  , (err instanceof Error ? err.toString() : err)
+	);
+
+	flag(this, 'object', err);
+	return this;
+>>>>>>> Add test with mocha and chai
       }
 
       // next, check constructor
       if (constructor) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         this.assert(
             err instanceof constructor
           , 'expected #{this} to throw #{exp} but #{act} was thrown'
@@ -1616,10 +1887,25 @@ module.exports = function (chai, _) {
           flag(this, 'object', err);
           return this;
         }
+=======
+	this.assert(
+	    err instanceof constructor
+	  , 'expected #{this} to throw #{exp} but #{act} was thrown'
+	  , 'expected #{this} to not throw #{exp} but #{act} was thrown'
+	  , name
+	  , (err instanceof Error ? err.toString() : err)
+	);
+
+	if (!errMsg) {
+	  flag(this, 'object', err);
+	  return this;
+	}
+>>>>>>> Add test with mocha and chai
       }
 
       // next, check message
       var message = 'error' === _.type(err) && "message" in err
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         ? err.message
         : '' + err;
 
@@ -1648,22 +1934,63 @@ module.exports = function (chai, _) {
       } else {
         thrown = true;
         thrownError = err;
+=======
+	? err.message
+	: '' + err;
+
+      if ((message != null) && errMsg && errMsg instanceof RegExp) {
+	this.assert(
+	    errMsg.exec(message)
+	  , 'expected #{this} to throw error matching #{exp} but got #{act}'
+	  , 'expected #{this} to throw error not matching #{exp}'
+	  , errMsg
+	  , message
+	);
+
+	flag(this, 'object', err);
+	return this;
+      } else if ((message != null) && errMsg && 'string' === typeof errMsg) {
+	this.assert(
+	    ~message.indexOf(errMsg)
+	  , 'expected #{this} to throw error including #{exp} but got #{act}'
+	  , 'expected #{this} to throw error not including #{act}'
+	  , errMsg
+	  , message
+	);
+
+	flag(this, 'object', err);
+	return this;
+      } else {
+	thrown = true;
+	thrownError = err;
+>>>>>>> Add test with mocha and chai
       }
     }
 
     var actuallyGot = ''
       , expectedThrown = name !== null
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         ? name
         : desiredError
           ? '#{exp}' //_.inspect(desiredError)
           : 'an error';
+=======
+	? name
+	: desiredError
+	  ? '#{exp}' //_.inspect(desiredError)
+	  : 'an error';
+>>>>>>> Add test with mocha and chai
 
     if (thrown) {
       actuallyGot = ' but #{act} was thrown'
     }
 
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         thrown === true
+=======
+	thrown === true
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to throw ' + expectedThrown + actuallyGot
       , 'expected #{this} to not throw ' + expectedThrown + actuallyGot
       , (desiredError instanceof Error ? desiredError.toString() : desiredError)
@@ -1705,11 +2032,19 @@ module.exports = function (chai, _) {
     var obj = flag(this, 'object')
       , itself = flag(this, 'itself')
       , context = ('function' === _.type(obj) && !itself)
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         ? obj.prototype[method]
         : obj[method];
 
     this.assert(
         'function' === typeof context
+=======
+	? obj.prototype[method]
+	: obj[method];
+
+    this.assert(
+	'function' === typeof context
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to respond to ' + _.inspect(method)
       , 'expected #{this} to not respond to ' + _.inspect(method)
     );
@@ -1759,7 +2094,11 @@ module.exports = function (chai, _) {
     var obj = flag(this, 'object');
     var result = matcher(obj);
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         result
+=======
+	result
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to satisfy ' + _.objDisplay(matcher)
       , 'expected #{this} to not satisfy' + _.objDisplay(matcher)
       , this.negate ? false : true
@@ -1796,7 +2135,11 @@ module.exports = function (chai, _) {
     }
 
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         Math.abs(obj - expected) <= delta
+=======
+	Math.abs(obj - expected) <= delta
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to be close to ' + expected + ' +/- ' + delta
       , 'expected #{this} not to be close to ' + expected + ' +/- ' + delta
     );
@@ -1810,7 +2153,11 @@ module.exports = function (chai, _) {
       if (!cmp) return superset.indexOf(elem) !== -1;
 
       return superset.some(function(elem2) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return cmp(elem, elem2);
+=======
+	return cmp(elem, elem2);
+>>>>>>> Add test with mocha and chai
       });
     })
   }
@@ -1849,20 +2196,36 @@ module.exports = function (chai, _) {
 
     if (flag(this, 'contains')) {
       return this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           isSubsetOf(subset, obj, cmp)
         , 'expected #{this} to be a superset of #{act}'
         , 'expected #{this} to not be a superset of #{act}'
         , obj
         , subset
+=======
+	  isSubsetOf(subset, obj, cmp)
+	, 'expected #{this} to be a superset of #{act}'
+	, 'expected #{this} to not be a superset of #{act}'
+	, obj
+	, subset
+>>>>>>> Add test with mocha and chai
       );
     }
 
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         isSubsetOf(obj, subset, cmp) && isSubsetOf(subset, obj, cmp)
         , 'expected #{this} to have the same members as #{act}'
         , 'expected #{this} to not have the same members as #{act}'
         , obj
         , subset
+=======
+	isSubsetOf(obj, subset, cmp) && isSubsetOf(subset, obj, cmp)
+	, 'expected #{this} to have the same members as #{act}'
+	, 'expected #{this} to not have the same members as #{act}'
+	, obj
+	, subset
+>>>>>>> Add test with mocha and chai
     );
   });
 
@@ -1894,7 +2257,11 @@ module.exports = function (chai, _) {
     new Assertion(list).to.be.an('array');
 
     this.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         list.indexOf(expected) > -1
+=======
+	list.indexOf(expected) > -1
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to be one of #{exp}'
       , 'expected #{this} to not be one of #{exp}'
       , list
@@ -2187,7 +2554,11 @@ module.exports = function (chai, util) {
   var assert = chai.assert = function (express, errmsg) {
     var test = new Assertion(null, null, chai.assert);
     test.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         express
+=======
+	express
+>>>>>>> Add test with mocha and chai
       , errmsg
       , '[ negation message unavailable ]'
     );
@@ -2210,7 +2581,11 @@ module.exports = function (chai, util) {
   assert.fail = function (actual, expected, message, operator) {
     message = message || 'assert.fail()';
     throw new chai.AssertionError(message, {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         actual: actual
+=======
+	actual: actual
+>>>>>>> Add test with mocha and chai
       , expected: expected
       , operator: operator
     }, assert.fail);
@@ -2275,7 +2650,11 @@ module.exports = function (chai, util) {
     var test = new Assertion(act, msg, assert.equal);
 
     test.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         exp == flag(test, 'object')
+=======
+	exp == flag(test, 'object')
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to equal #{exp}'
       , 'expected #{this} to not equal #{act}'
       , exp
@@ -2302,7 +2681,11 @@ module.exports = function (chai, util) {
     var test = new Assertion(act, msg, assert.notEqual);
 
     test.assert(
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         exp != flag(test, 'object')
+=======
+	exp != flag(test, 'object')
+>>>>>>> Add test with mocha and chai
       , 'expected #{this} to not equal #{exp}'
       , 'expected #{this} to equal #{act}'
       , exp
@@ -3321,6 +3704,7 @@ module.exports = function (chai, util) {
     var ok;
     switch(operator) {
       case '==':
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         ok = val == val2;
         break;
       case '===':
@@ -3350,6 +3734,37 @@ module.exports = function (chai, util) {
     var test = new Assertion(ok, msg);
     test.assert(
         true === flag(test, 'object')
+=======
+	ok = val == val2;
+	break;
+      case '===':
+	ok = val === val2;
+	break;
+      case '>':
+	ok = val > val2;
+	break;
+      case '>=':
+	ok = val >= val2;
+	break;
+      case '<':
+	ok = val < val2;
+	break;
+      case '<=':
+	ok = val <= val2;
+	break;
+      case '!=':
+	ok = val != val2;
+	break;
+      case '!==':
+	ok = val !== val2;
+	break;
+      default:
+	throw new Error('Invalid operator "' + operator + '"');
+    }
+    var test = new Assertion(ok, msg);
+    test.assert(
+	true === flag(test, 'object')
+>>>>>>> Add test with mocha and chai
       , 'expected ' + util.inspect(val) + ' to be ' + operator + ' ' + util.inspect(val2)
       , 'expected ' + util.inspect(val) + ' to not be ' + operator + ' ' + util.inspect(val2) );
   };
@@ -3824,7 +4239,11 @@ module.exports = function (chai, util) {
   chai.expect.fail = function (actual, expected, message, operator) {
     message = message || 'expect.fail()';
     throw new chai.AssertionError(message, {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         actual: actual
+=======
+	actual: actual
+>>>>>>> Add test with mocha and chai
       , expected: expected
       , operator: operator
     }, chai.expect.fail);
@@ -3845,7 +4264,11 @@ module.exports = function (chai, util) {
     // explicitly define this method as function as to have it's name to include as `ssfi`
     function shouldGetter() {
       if (this instanceof String || this instanceof Number || this instanceof Boolean ) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return new Assertion(this.valueOf(), null, shouldGetter);
+=======
+	return new Assertion(this.valueOf(), null, shouldGetter);
+>>>>>>> Add test with mocha and chai
       }
       return new Assertion(this, null, shouldGetter);
     }
@@ -3857,10 +4280,17 @@ module.exports = function (chai, util) {
       // Note that we have to use [[DefineProperty]] instead of [[Put]]
       // since otherwise we would trigger this very setter!
       Object.defineProperty(this, 'should', {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         value: value,
         enumerable: true,
         configurable: true,
         writable: true
+=======
+	value: value,
+	enumerable: true,
+	configurable: true,
+	writable: true
+>>>>>>> Add test with mocha and chai
       });
     }
     // modify Object.prototype to have `should`
@@ -3889,9 +4319,15 @@ module.exports = function (chai, util) {
     should.fail = function (actual, expected, message, operator) {
       message = message || 'should.fail()';
       throw new chai.AssertionError(message, {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           actual: actual
         , expected: expected
         , operator: operator
+=======
+	  actual: actual
+	, expected: expected
+	, operator: operator
+>>>>>>> Add test with mocha and chai
       }, should.fail);
     };
 
@@ -4112,6 +4548,7 @@ module.exports = function (ctx, name, method, chainingBehavior) {
 
   Object.defineProperty(ctx, name,
     { get: function () {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         chainableBehavior.chainingBehavior.call(this);
 
         var assert = function assert() {
@@ -4143,6 +4580,39 @@ module.exports = function (ctx, name, method, chainingBehavior) {
 
         transferFlags(this, assert);
         return assert;
+=======
+	chainableBehavior.chainingBehavior.call(this);
+
+	var assert = function assert() {
+	  var old_ssfi = flag(this, 'ssfi');
+	  if (old_ssfi && config.includeStack === false)
+	    flag(this, 'ssfi', assert);
+	  var result = chainableBehavior.method.apply(this, arguments);
+	  return result === undefined ? this : result;
+	};
+
+	// Use `__proto__` if available
+	if (hasProtoSupport) {
+	  // Inherit all properties from the object by replacing the `Function` prototype
+	  var prototype = assert.__proto__ = Object.create(this);
+	  // Restore the `call` and `apply` methods from `Function`
+	  prototype.call = call;
+	  prototype.apply = apply;
+	}
+	// Otherwise, redefine all properties (slow!)
+	else {
+	  var asserterNames = Object.getOwnPropertyNames(ctx);
+	  asserterNames.forEach(function (asserterName) {
+	    if (!excludeNames.test(asserterName)) {
+	      var pd = Object.getOwnPropertyDescriptor(ctx, asserterName);
+	      Object.defineProperty(assert, asserterName, pd);
+	    }
+	  });
+	}
+
+	transferFlags(this, assert);
+	return assert;
+>>>>>>> Add test with mocha and chai
       }
     , configurable: true
   });
@@ -4233,12 +4703,21 @@ var flag = require('./flag');
 module.exports = function (ctx, name, getter) {
   Object.defineProperty(ctx, name,
     { get: function addProperty() {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         var old_ssfi = flag(this, 'ssfi');
         if (old_ssfi && config.includeStack === false)
           flag(this, 'ssfi', addProperty);
 
         var result = getter.call(this);
         return result === undefined ? this : result;
+=======
+	var old_ssfi = flag(this, 'ssfi');
+	if (old_ssfi && config.includeStack === false)
+	  flag(this, 'ssfi', addProperty);
+
+	var result = getter.call(this);
+	return result === undefined ? this : result;
+>>>>>>> Add test with mocha and chai
       }
     , configurable: true
   });
@@ -4552,9 +5031,15 @@ function _getPathValue (parsed, obj, index) {
     var part = parsed[i];
     if (tmp) {
       if ('undefined' !== typeof part.p)
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         tmp = tmp[part.p];
       else if ('undefined' !== typeof part.i)
         tmp = tmp[part.i];
+=======
+	tmp = tmp[part.p];
+      else if ('undefined' !== typeof part.i)
+	tmp = tmp[part.i];
+>>>>>>> Add test with mocha and chai
       if (i == (l - 1)) res = tmp;
     } else {
       res = undefined;
@@ -4918,6 +5403,7 @@ function formatValue(ctx, value, recurseTimes) {
     } else {
       // Attempt to serialize it
       try {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         if (document.xmlVersion) {
           var xmlSerializer = new XMLSerializer();
           return xmlSerializer.serializeToString(value);
@@ -4938,6 +5424,28 @@ function formatValue(ctx, value, recurseTimes) {
         // This could be a non-native DOM implementation,
         //   continue with the normal flow:
         //   printing the element as if it is an object.
+=======
+	if (document.xmlVersion) {
+	  var xmlSerializer = new XMLSerializer();
+	  return xmlSerializer.serializeToString(value);
+	} else {
+	  // Firefox 11- do not support outerHTML
+	  //   It does, however, support innerHTML
+	  //   Use the following to render the element
+	  var ns = "http://www.w3.org/1999/xhtml";
+	  var container = document.createElementNS(ns, '_');
+
+	  container.appendChild(value.cloneNode(false));
+	  html = container.innerHTML
+	    .replace('><', '>' + value.innerHTML + '<');
+	  container.innerHTML = '';
+	  return html;
+	}
+      } catch (err) {
+	// This could be a non-native DOM implementation,
+	//   continue with the normal flow:
+	//   printing the element as if it is an object.
+>>>>>>> Add test with mocha and chai
       }
     }
   }
@@ -5035,13 +5543,22 @@ function formatPrimitive(ctx, value) {
 
     case 'string':
       var simple = '\'' + JSON.stringify(value).replace(/^"|"$/g, '')
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
                                                .replace(/'/g, "\\'")
                                                .replace(/\\"/g, '"') + '\'';
+=======
+					       .replace(/'/g, "\\'")
+					       .replace(/\\"/g, '"') + '\'';
+>>>>>>> Add test with mocha and chai
       return ctx.stylize(simple, 'string');
 
     case 'number':
       if (value === 0 && (1/value) === -Infinity) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return ctx.stylize('-0', 'number');
+=======
+	return ctx.stylize('-0', 'number');
+>>>>>>> Add test with mocha and chai
       }
       return ctx.stylize('' + value, 'number');
 
@@ -5065,7 +5582,11 @@ function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
   for (var i = 0, l = value.length; i < l; ++i) {
     if (Object.prototype.hasOwnProperty.call(value, String(i))) {
       output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           String(i), true));
+=======
+	  String(i), true));
+>>>>>>> Add test with mocha and chai
     } else {
       output.push('');
     }
@@ -5073,7 +5594,11 @@ function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
   keys.forEach(function(key) {
     if (!key.match(/^\d+$/)) {
       output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
           key, true));
+=======
+	  key, true));
+>>>>>>> Add test with mocha and chai
     }
   });
   return output;
@@ -5085,6 +5610,7 @@ function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
   if (value.__lookupGetter__) {
     if (value.__lookupGetter__(key)) {
       if (value.__lookupSetter__(key)) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         str = ctx.stylize('[Getter/Setter]', 'special');
       } else {
         str = ctx.stylize('[Getter]', 'special');
@@ -5092,6 +5618,15 @@ function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
     } else {
       if (value.__lookupSetter__(key)) {
         str = ctx.stylize('[Setter]', 'special');
+=======
+	str = ctx.stylize('[Getter/Setter]', 'special');
+      } else {
+	str = ctx.stylize('[Getter]', 'special');
+      }
+    } else {
+      if (value.__lookupSetter__(key)) {
+	str = ctx.stylize('[Setter]', 'special');
+>>>>>>> Add test with mocha and chai
       }
     }
   }
@@ -5101,6 +5636,7 @@ function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
   if (!str) {
     if (ctx.seen.indexOf(value[key]) < 0) {
       if (recurseTimes === null) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         str = formatValue(ctx, value[key], null);
       } else {
         str = formatValue(ctx, value[key], recurseTimes - 1);
@@ -5115,6 +5651,22 @@ function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
             return '   ' + line;
           }).join('\n');
         }
+=======
+	str = formatValue(ctx, value[key], null);
+      } else {
+	str = formatValue(ctx, value[key], recurseTimes - 1);
+      }
+      if (str.indexOf('\n') > -1) {
+	if (array) {
+	  str = str.split('\n').map(function(line) {
+	    return '  ' + line;
+	  }).join('\n').substr(2);
+	} else {
+	  str = '\n' + str.split('\n').map(function(line) {
+	    return '   ' + line;
+	  }).join('\n');
+	}
+>>>>>>> Add test with mocha and chai
       }
     } else {
       str = ctx.stylize('[Circular]', 'special');
@@ -5130,8 +5682,13 @@ function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
       name = ctx.stylize(name, 'name');
     } else {
       name = name.replace(/'/g, "\\'")
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
                  .replace(/\\"/g, '"')
                  .replace(/(^"|"$)/g, "'");
+=======
+		 .replace(/\\"/g, '"')
+		 .replace(/(^"|"$)/g, "'");
+>>>>>>> Add test with mocha and chai
       name = ctx.stylize(name, 'string');
     }
   }
@@ -5150,11 +5707,19 @@ function reduceToSingleString(output, base, braces) {
 
   if (length > 60) {
     return braces[0] +
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
            (base === '' ? '' : base + '\n ') +
            ' ' +
            output.join(',\n  ') +
            ' ' +
            braces[1];
+=======
+	   (base === '' ? '' : base + '\n ') +
+	   ' ' +
+	   output.join(',\n  ') +
+	   ' ' +
+	   braces[1];
+>>>>>>> Add test with mocha and chai
   }
 
   return braces[0] + base + ' ' + output.join(', ') + ' ' + braces[1];
@@ -5162,7 +5727,11 @@ function reduceToSingleString(output, base, braces) {
 
 function isArray(ar) {
   return Array.isArray(ar) ||
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
          (typeof ar === 'object' && objectToString(ar) === '[object Array]');
+=======
+	 (typeof ar === 'object' && objectToString(ar) === '[object Array]');
+>>>>>>> Add test with mocha and chai
 }
 
 function isRegExp(re) {
@@ -5215,15 +5784,26 @@ module.exports = function (obj) {
   if (config.truncateThreshold && str.length >= config.truncateThreshold) {
     if (type === '[object Function]') {
       return !obj.name || obj.name === ''
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         ? '[Function]'
         : '[Function: ' + obj.name + ']';
+=======
+	? '[Function]'
+	: '[Function: ' + obj.name + ']';
+>>>>>>> Add test with mocha and chai
     } else if (type === '[object Array]') {
       return '[ Array(' + obj.length + ') ]';
     } else if (type === '[object Object]') {
       var keys = Object.keys(obj)
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         , kstr = keys.length > 2
           ? keys.splice(0, 2).join(', ') + ', ...'
           : keys.join(', ');
+=======
+	, kstr = keys.length > 2
+	  ? keys.splice(0, 2).join(', ') + ', ...'
+	  : keys.join(', ');
+>>>>>>> Add test with mocha and chai
       return '{ Object (' + kstr + ') }';
     } else {
       return str;
@@ -5393,8 +5973,13 @@ module.exports = function (ctx, name, getter) {
 
   Object.defineProperty(ctx, name,
     { get: function () {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         var result = getter(_super).call(this);
         return result === undefined ? this : result;
+=======
+	var result = getter(_super).call(this);
+	return result === undefined ? this : result;
+>>>>>>> Add test with mocha and chai
       }
     , configurable: true
   });
@@ -5471,7 +6056,11 @@ module.exports = function (assertion, object, includeAll) {
 
   for (var flag in flags) {
     if (includeAll ||
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         (flag !== 'object' && flag !== 'ssfi' && flag != 'message')) {
+=======
+	(flag !== 'object' && flag !== 'ssfi' && flag != 'message')) {
+>>>>>>> Add test with mocha and chai
       object.__flags[flag] = flags[flag];
     }
   }
@@ -5819,7 +6408,11 @@ function objectEqual(a, b, m) {
     for (i = 0; i < m.length; i++) {
       if ((m[i][0] === a && m[i][1] === b)
       ||  (m[i][0] === b && m[i][1] === a)) {
+<<<<<<< b74099583f0d0ff0ebf1681819ed69934bd28b68
         return true;
+=======
+	return true;
+>>>>>>> Add test with mocha and chai
       }
     }
   } else {
